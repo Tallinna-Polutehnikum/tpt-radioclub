@@ -1,17 +1,12 @@
 import React from "react";
 import Player from "./Player";
 
-/**
- * Hero содержит SVG трансивер в ретро-стиле.
- * SVG полностью векторный: легко изменить частоту или цвета.
- */
-
 const Hero: React.FC = () => {
     return (
         <section id="home" className="hero">
             <div className="hero-left">
-                <div className="radio-card" role="img" aria-label="Коротковолновый радиолюбительский трансивер">
-                    {/* SVG трансивера */}
+                <div className="radio-card" role="img" aria-label="Shortwave Transceiver">
+
                     <svg viewBox="0 0 800 450" preserveAspectRatio="xMidYMid meet" className="transceiver-svg">
                         <defs>
                             <filter id="grain">
@@ -21,10 +16,9 @@ const Hero: React.FC = () => {
                             </filter>
                         </defs>
 
-                        {/* корпус */}
                         <rect x="30" y="35" rx="30" ry="30" width="740" height="360" fill="#a83b2a" stroke="#4a2f26" strokeWidth="6" />
                         <rect x="60" y="65" rx="18" ry="18" width="680" height="150" fill="#e9d6bf" />
-                        {/* решётка динамика */}
+
                         <g transform="translate(80,80)">
                             <rect width="420" height="120" rx="8" fill="#d6c1a9" />
                             <g fill="#8b6f5e" opacity="0.9">
@@ -36,11 +30,9 @@ const Hero: React.FC = () => {
                             </g>
                         </g>
 
-                        {/* шкала частоты (аналоговая) */}
                         <g transform="translate(520,80)">
                             <rect x="-10" y="0" width="220" height="120" rx="10" fill="#e3cdb4" stroke="#4a2f26" />
 
-                            {/*S-meter*/}
                             <text x="0" y="25" fontSize="15" fill="#4a2f26">S</text>
                             <text x="20" y="25" fontSize="15" fill="#4a2f26">1</text>
                             <text x="40" y="25" fontSize="15" fill="#4a2f26">3</text>
@@ -51,28 +43,25 @@ const Hero: React.FC = () => {
                             <text x="145" y="25" fontSize="15" fill="#4a2f26">+40</text>
                             <text x="175" y="25" fontSize="15" fill="#4a2f26">+60</text>
 
-                            {/* отметки */}
                             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => {
                                 const x = 10 + i * 18;
                                 return <line key={i} x1={x} y1={90} x2={x} y2={102} stroke="#4a2f26" strokeWidth="2" />;
                             })}
-                            {/* цифровые числа (кМГц эквивалент) */}
+
                             <text x="0" y="84" fontSize="20" fill="#4a2f26">1.8</text>
                             <text x="55" y="84" fontSize="20" fill="#4a2f26">3.5</text>
                             <text x="108" y="84" fontSize="20" fill="#4a2f26">7</text>
                             <text x="140" y="84" fontSize="20" fill="#4a2f26">14</text>
                             <text x="180" y="84" fontSize="20" fill="#4a2f26">21</text>
 
-                            {/* стрелка-курсор */}
                             <g transform="translate(120,92)">
                                 <rect x="-32" y="-36" width="4" height="60" rx="3" fill="#3b2b24" />
                             </g>
                         </g>
 
-                        {/* панель с кнопками и цифровым дисплеем */}
                         <g transform="translate(80,230)">
                             <rect x="-20" y="0" rx="10" width="683" height="150" fill="#d9bfa7" stroke="#4a2f26" strokeWidth="4" />
-                            {/* кнопки */}
+
                             <g transform="translate(20,20)">
                                 {["AGC", "NB", "NR", "MODE", "VFO", "TUNER"].map((txt, i) => (
                                     <g key={txt} transform={`translate(${i * 110},0)`}>
@@ -82,13 +71,11 @@ const Hero: React.FC = () => {
                                 ))}
                             </g>
 
-                            {/* дисплей */}
                             <g transform="translate(360,12)">
                                 <rect x="43" y="65" width="240" height="64" rx="8" fill="#2b1e18" />
                                 <text x="165" y="109" textAnchor="middle" fontSize="36" fontFamily="monospace" fill="#f3c79b">3.670 kHz</text>
                             </g>
 
-                            {/* большой регулятор слева */}
                             <g transform="translate(10,86)">
                                 <circle cx="35" cy="25" r="32" fill="#4a2f26" />
                                 <circle cx="35" cy="25" r="22" fill="#2a1a16" />
@@ -110,7 +97,6 @@ const Hero: React.FC = () => {
             </div>
 
             <div className="hero-right">
-                {/* big vintage title / poster look or additional imagery */}
                 <div className="poster">
                     <h3>Club Meetings</h3>
                     <p>Every Tuesday, 18:00 – 22:00 at <strong>Tallinn Polytech School</strong></p>

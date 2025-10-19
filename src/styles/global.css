@@ -119,7 +119,6 @@ body {
   color: var(--accent);
 }
 
-/* адаптивность */
 @media (max-width: 768px) {
   .header-inner {
     flex-direction: column;
@@ -128,7 +127,6 @@ body {
 
   .header-side {
     display: none;
-    /* убрать иконки на мобильных, если мешают */
   }
 
   .brand-title {

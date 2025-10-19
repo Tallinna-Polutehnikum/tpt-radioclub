@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Mic2, Radio } from "lucide-react"; // иконки микрофона и трансивера
+import { Mic2, Radio } from "lucide-react";
 
 const Header: React.FC = () => {
     const linkClass = ({ isActive }: { isActive: boolean }) =>
