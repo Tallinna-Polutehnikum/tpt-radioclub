@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "src": "/gallery/IMG_1693.png",
+        "title": "ES1TP Ham Shack",
+        "desc": "Place of weekly gathering of local shortwave enthusiasts."
+    },
+    {
+        "id": 2,
+        "src": "/gallery/IMG_2196.png",
+        "title": "ES3KYZ at work",
+        "desc": "ES ULL KV 144 contest"
+    },
+    {
+        "id": 3,
+        "src": "/gallery/IMG_2651.png",
+        "title": "ES1TP HF set up",
+        "desc": "Outdoor antenna and portable rigs near Tallinn bay."
+    },
+    {
+        "id": 4,
+        "src": "/gallery/IMG_2435.png",
+        "title": "Antenna Maintenance",
+        "desc": "ES3EA, ES3KYZ 2m and 70cm antenna maintenance"
+    },
+    {
+        "id": 5,
+        "src": "/gallery/IMG_2433.png",
+        "title": "Antenna Maintenance",
+        "desc": "ES3EA, ES3KYZ 2m and 70cm antenna maintenance from another angle"
+    },
+    {
+        "id": 6,
+        "src": "/gallery/IMG_2436.png",
+        "title": "HF antenna",
+        "desc": "20m, 15m, 10m Moxon antenna on Tallinn Polytechnic School roof"
+    }
+]
