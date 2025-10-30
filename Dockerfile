@@ -14,18 +14,14 @@ COPY . .
 RUN npm run build
 
 # ============================
-# RUN STAGE
+# PRODUCTION STAGE
 # ============================
-FROM node:24-alpine AS production
+FROM nginx:alpine AS production
 
-WORKDIR /app
+COPY --from=build /app/dist /usr/share/nginx/html
 
-COPY --from=build /app/dist ./dist
-
-COPY package*.json ./
-
-RUN npm install vite --omit=dev
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-CMD ["npx", "vite", "preview", "--host", "0.0.0.0", "--port", "80"]
+CMD ["nginx", "-g", "daemon off;"]
