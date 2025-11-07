@@ -1,10 +1,18 @@
 [
     {
+        "id": "tpt_110_years",
+        "title": "Tallinn Polytechnic School 110 – Our School’s Story",
+        "date": "November 7, 2025",
+        "description": "“Tallinn Polytechnic School 110 – Our School’s Story” welcomes warm and heartfelt stories from employees, alumni, partners, and current students alike. Your story can be shared through words, pictures, or film — in written form, photos from the past, or archival footage.",
+        "image": "/images/20251013_tpt0174_meie-kooli-lugu_1200x800px_v01.png",
+        "content": "<p><strong>“Tallinn Polytechnic School 110 – Our School’s Story”</strong> welcomes warm and heartfelt stories from employees, alumni, partners, and current students alike.</p> <p>Your story can be shared through words, pictures, or film — in written form, photos from the past, or archival footage.</p> <p>The 110-year journey of technical education at Tallinn Polytechnic School is a unique and remarkable chapter in Estonia’s educational landscape — one that deserves to be told to today’s youth and to future generations.</p> <p>Stories are welcome at <strong>meiekoolilugu@tptlive.ee</strong> until the end of 2025.</p> <p><a href=\"https://www.tptlive.ee/et/uudised/tallinna-polutehnikum-110-meie-kooli-lugu\" target=\"_blank\" rel=\"noopener noreferrer\">Read more about the project here.</a></p>"
+    },
+    {
         "id": "special_call_ES90ERAU",
         "title": "Celebrating 90 Years of the Estonian Radio Amateurs Union",
         "date": "September 30, 2025",
         "description": "A short overview of the Estonian Radio Amateurs Union’s 90th anniversary special event, where operators across Estonia, activated the special callsign ES90ERAU from 20–30 September 2025 to celebrate nine decades of amateur radio activity and community spirit.",
         "image": "/images/ES90ERAU_QSL.jpg",
-        "content": "From 20–30 September 2025, Estonian radio amateurs came together on the airwaves to celebrate the 90th anniversary of the Estonian Radio Amateurs Union (ERAU). To mark this milestone, a special event callsign ES90ERAU was active throughout the country, operated by many Estonian hams who joined the effort to make the jubilee memorable and widely heard across the bands. \n\n During the 10-day celebration, operators made thousands of QSOs with stations from all around the world, promoting Estonian amateur radio and honoring nine decades of organized amateur radio activity in Estonia. \n\n Among the active operators was ES2OA, who contributed to the event with around 150 QSOs. It was a rewarding experience filled with pileups, friendly contacts, and a shared sense of national pride in ERAU’s long and vibrant history.\n\nCongratulations to ERAU on 90 years of service to the amateur radio community — here’s to many more years of innovation, friendship, and radio adventure!"
+        "content": "<p>From 20–30 September 2025, Estonian radio amateurs came together on the airwaves to celebrate the 90th anniversary of the Estonian Radio Amateurs Union (ERAU). To mark this milestone, a special event callsign ES90ERAU was active throughout the country, operated by many Estonian hams who joined the effort to make the jubilee memorable and widely heard across the bands.</p> <p>During the 10-day celebration, operators made thousands of QSOs with stations from all around the world, promoting Estonian amateur radio and honoring nine decades of organized amateur radio activity in Estonia.</p> <p>Among the active operators was ES2OA, who contributed to the event with around 150 QSOs. It was a rewarding experience filled with pileups, friendly contacts, and a shared sense of national pride in ERAU’s long and vibrant history.</p> <p>Congratulations to ERAU on 90 years of service to the amateur radio community — here’s to many more years of innovation, friendship, and radio adventure!</p>"
     }
 ]
