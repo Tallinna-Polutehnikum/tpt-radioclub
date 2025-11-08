@@ -100,7 +100,7 @@ const Hero: React.FC = () => {
                 <div className="poster">
                     <h3>Club Meetings</h3>
                     <p>Every Tuesday, 18:00 – 22:00 at <strong>Tallinn Polytech School</strong></p>
-                    <button className="cta">Join a meeting</button>
+                    <button className="cta" onClick={() => window.open('https://meshtastic.ee/en/meetups')}>Join a meeting</button>
                 </div>
             </div>
         </section>

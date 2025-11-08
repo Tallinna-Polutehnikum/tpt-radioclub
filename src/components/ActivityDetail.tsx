@@ -49,10 +49,7 @@ const ActivityDetail: React.FC = () => {
                     <p className="activity-date">{activity.date}</p>
                 </div>
             </div>
-            <div className="activity-content">
-                {activity.content.split("\n").map((p, i) => (
-                    <p key={i}>{p.trim()}</p>
-                ))}
+            <div className="activity-content" dangerouslySetInnerHTML={{ __html: activity.content }}>
             </div>
         </div>
     );
