@@ -36,14 +36,27 @@ jobs:
           echo "owner_lower=$owner_lower" >> $GITHUB_OUTPUT
           echo "repo_lower=$repo_lower" >> $GITHUB_OUTPUT
 
+      - name: Set image tags
+        id: tags
+        run: |
+          OWNER_LOWER="${{ steps.vars.outputs.owner_lower }}"
+          REPO_LOWER="${{ steps.vars.outputs.repo_lower }}"
+          TAGS="ghcr.io/${OWNER_LOWER}/${REPO_LOWER}:${{ github.sha }}"
+
+          if [[ "${{ github.ref_name }}" == "main" ]]; then
+            TAGS="$TAGS,ghcr.io/${OWNER_LOWER}/${REPO_LOWER}:latest"
+          elif [[ "${{ github.ref_name }}" == "release" ]]; then
+            TAGS="$TAGS,ghcr.io/${OWNER_LOWER}/${REPO_LOWER}:dev"
+          fi
+
+          echo "tags=$TAGS" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: |
-            ghcr.io/${{ steps.vars.outputs.owner_lower }}/${{ steps.vars.outputs.repo_lower }}:latest
-            ghcr.io/${{ steps.vars.outputs.owner_lower }}/${{ steps.vars.outputs.repo_lower }}:${{ github.sha }}
+          tags: ${{ steps.tags.outputs.tags }}
 
       - name: Logout from GHCR
         run: docker logout ghcr.io
