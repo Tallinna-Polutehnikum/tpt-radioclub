@@ -36,14 +36,32 @@ jobs:
           echo "owner_lower=$owner_lower" >> $GITHUB_OUTPUT
           echo "repo_lower=$repo_lower" >> $GITHUB_OUTPUT
 
+      - name: Set image tags
+        id: tags
+        run: |
+          # Lowercase repo and owner (from existing vars step outputs)
+          OWNER_LOWER="${{ steps.vars.outputs.owner_lower }}"
+          REPO_LOWER="${{ steps.vars.outputs.repo_lower }}"
+
+          # Determine tag based on branch name
+          if [[ "${{ github.ref_name }}" == "main" ]]; then
+            EXTRA_TAG="latest"
+          elif [[ "${{ github.ref_name }}" == "release" ]]; then
+            EXTRA_TAG="dev"
+          else
+            EXTRA_TAG=""
+          fi
+
+          echo "extra_tag=$EXTRA_TAG" >> $GITHUB_OUTPUT
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ steps.vars.outputs.owner_lower }}/${{ steps.vars.outputs.repo_lower }}:latest
             ghcr.io/${{ steps.vars.outputs.owner_lower }}/${{ steps.vars.outputs.repo_lower }}:${{ github.sha }}
+            ${{ steps.tags.outputs.extra_tag && format('ghcr.io/{0}/{1}:{2}', steps.vars.outputs.owner_lower, steps.vars.outputs.repo_lower, steps.tags.outputs.extra_tag) }}
 
       - name: Logout from GHCR
         run: docker logout ghcr.io
