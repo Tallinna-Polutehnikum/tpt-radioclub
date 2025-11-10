@@ -44,9 +44,9 @@ jobs:
           TAGS="ghcr.io/${OWNER_LOWER}/${REPO_LOWER}:${{ github.sha }}"
 
           if [[ "${{ github.ref_name }}" == "main" ]]; then
-            TAGS="$TAGS,ghcr.io/${OWNER_LOWER}/${REPO_LOWER}:latest"
-          elif [[ "${{ github.ref_name }}" == "release" ]]; then
             TAGS="$TAGS,ghcr.io/${OWNER_LOWER}/${REPO_LOWER}:dev"
+          elif [[ "${{ github.ref_name }}" == "release" ]]; then
+            TAGS="$TAGS,ghcr.io/${OWNER_LOWER}/${REPO_LOWER}:latest"
           fi
 
           echo "tags=$TAGS" >> $GITHUB_OUTPUT
