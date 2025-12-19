@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
                     <p className="muted">Founded by passionate amateur radio operators, TPT Radio Club keeps the spirit of traditional shortwave alive while embracing the technology of today. From Morse code and QRP adventures to antenna building and friendly contests, we’re always on the air — learning, sharing, and connecting.</p>
                     <p className="muted">Join us on our weekly nets, events, and workshops.
                         Let’s make the world smaller, one signal at a time.</p>
-                    <p className="muted">🎙️ 73 from ES1TP!</p>
+                    <p className="muted">🎙️ 73! de ES1TP</p>
                 </div>
             </div>
 
