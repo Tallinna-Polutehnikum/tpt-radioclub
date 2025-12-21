@@ -77,6 +77,19 @@
         ]
     },
     {
+        "callsign": "ES1TEM",
+        "name": "Martin",
+        "qth": "Tallinn",
+        "locator": "KO29IJ",
+        "bands": [
+            "VHF",
+            "UHF"
+        ],
+        "modes": [
+            "FM"
+        ]
+    },
+    {
         "callsign": "ES1MW",
         "name": "Tiit",
         "qth": "Tallinn",
@@ -199,7 +212,28 @@
         ]
     },
     {
+        "callsign": "ES3RIT",
+        "name": "Toivo",
+        "bands": [
+            "HF",
+            "VHF",
+            "UHF"
+        ],
+        "modes": [
+            "FM",
+            "SSB"
+        ]
+    },
+    {
         "callsign": "LU1FAM",
-        "name": "Lucas"
+        "name": "Lucas",
+        "qth": "Tallinn",
+        "bands": [
+            "SSB"
+        ],
+        "modes": [
+            "SSB",
+            "CW"
+        ]
     }
 ]
