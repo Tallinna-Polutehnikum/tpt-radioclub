@@ -229,7 +229,9 @@
         "name": "Lucas",
         "qth": "Tallinn",
         "bands": [
-            "SSB"
+            "HF",
+            "VHF",
+            "UHF"
         ],
         "modes": [
             "SSB",
