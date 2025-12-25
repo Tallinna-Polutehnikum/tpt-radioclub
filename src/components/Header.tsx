@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Mic2, Radio } from "lucide-react";
 
 const Header: React.FC = () => {
@@ -20,7 +20,7 @@ const Header: React.FC = () => {
                         <p className="brand-sub">Shortwave from Tallinn</p>
                     </NavLink>
 
-                    <nav className="main-nav">
+                    <nav className="main-nav" aria-label="Main navigation">
                         <NavLink to="/" end className={linkClass}>
                             Home
                         </NavLink>
@@ -39,6 +39,7 @@ const Header: React.FC = () => {
                         <NavLink to="/callbook" className={linkClass}>
                             Callbook
                         </NavLink>
+                        <Link to="/admin" className="nav-btn">Admin</Link>
                     </nav>
                 </div>
 

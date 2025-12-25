@@ -56,8 +56,16 @@ const Callbook = () => {
                     <td>{e.name}</td>
                     <td>{e.qth ?? "—"}</td>
                     <td>{e.locator ?? "—"}</td>
-                    <td>{e.bands?.join(", ") ?? "—"}</td>
-                    <td>{e.modes?.join(", ")?? "—"}</td>
+                    <td>
+                      {(e.bands || []).map((b, i) => (
+                        <span key={b + i} className="chip">{b}</span>
+                      ))}
+                    </td>
+                    <td>
+                      {(e.modes || []).map((m, i) => (
+                        <span key={m + i} className="chip">{m}</span>
+                      ))}
+                    </td>
                   </tr>
                 ))}
               </tbody>

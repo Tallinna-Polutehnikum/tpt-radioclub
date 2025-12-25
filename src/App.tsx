@@ -12,6 +12,8 @@ import Gallery from "./components/Gallery";
 import ActivityDetail from "./components/ActivityDetail";
 import AllActivities from "./components/AllActivites";
 import Callbook from "./components/Callbook";
+import AdminApp from "./admin/AdminApp";
+import AdminLogin from "./admin/components/AdminLogin";
 
 const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -86,6 +88,8 @@ const AnimatedRoutes: React.FC = () => {
             <ActivityDetail />
           </PageWrapper>} />
         <Route path="/all-activities" element={<AllActivities />} />
+        <Route path="/admin/*" element={<AdminApp />} />
+        <Route path="/login" element={<AdminLogin />} />
       </Routes>
     </AnimatePresence>
   );
