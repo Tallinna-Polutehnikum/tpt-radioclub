@@ -15,6 +15,7 @@ import Callbook from "./components/Callbook";
 import AdminApp from "./admin/AdminApp";
 import AdminLogin from "./admin/components/AdminLogin";
 import { useAuth } from "./auth/AuthContext";
+import ExpandedGallery from "./components/ExpandedGallery";
 
 const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -88,6 +89,10 @@ const AnimatedRoutes: React.FC = () => {
         <Route path="/activities/:id" element={
           <PageWrapper>
             <ActivityDetail />
+          </PageWrapper>} />
+        <Route path="/gallery/:id" element={
+          <PageWrapper>
+            <ExpandedGallery />
           </PageWrapper>} />
         <Route path="/all-activities" element={<AllActivities />} />
         {role === "user" && <Route path="/admin/*" element={<AdminApp />} />}

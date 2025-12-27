@@ -6,7 +6,7 @@ export const getAllActivities = async (): Promise<Activity[]> => {
     const { data: activities } = await supabase
         .from('activities')
         .select()
-        .order('id', { ascending: false });
+        .order('date', { ascending: false });
 
     if (!activities)
         return [];
