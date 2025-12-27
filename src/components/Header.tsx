@@ -1,11 +1,14 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Mic2, Radio } from "lucide-react";
+import { useAuth } from "../auth/AuthContext";
 
 const Header: React.FC = () => {
+    const { role } = useAuth()
+    
     const linkClass = ({ isActive }: { isActive: boolean }) =>
         "nav-btn" + (isActive ? " active" : "");
-
+    console.log("Header render, role:", role);
     return (
         <header className="site-header">
             <div className="header-inner">
@@ -39,7 +42,7 @@ const Header: React.FC = () => {
                         <NavLink to="/callbook" className={linkClass}>
                             Callbook
                         </NavLink>
-                        <Link to="/admin" className="nav-btn">Admin</Link>
+                        {role === "user" && <NavLink to="/admin" className="nav-btn">Admin</NavLink>}
                     </nav>
                 </div>
 

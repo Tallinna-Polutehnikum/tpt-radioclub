@@ -1,23 +1,9 @@
-import React, { useState, useMemo, useRef } from "react";
-import rawCalls from "../../assets/callsigns.json";
-
-type CallsignEntry = {
-    callsign: string;
-    name?: string;
-    qth?: string;
-    locator?: string;
-    bands?: string[];
-    modes?: string[];
-};
-
-const initialDataUnfiltered: CallsignEntry[] = (rawCalls as unknown) as CallsignEntry[];
-
-// filter out empty/invalid records and normalize callsign casing
-const initialData: CallsignEntry[] = initialDataUnfiltered
-    .filter((r): r is CallsignEntry => !!r && typeof r.callsign === "string" && r.callsign.trim().length > 0)
-    .map((r) => ({ ...r, callsign: r.callsign.trim().toUpperCase() }));
+import React, { useState, useMemo, useRef, useEffect } from "react";
+import type { Callsign } from "../../components/Callbook";
+import { getAllCallSigns, updateCallSign } from "../../database/callsigns";
 
 const emptyForm = {
+    id: 0,
     callsign: "",
     name: "",
     qth: "",
@@ -33,17 +19,26 @@ const parseArray = (s: string) =>
         .filter(Boolean);
 
 const CallsignManager: React.FC = () => {
-    const [entries, setEntries] = useState<CallsignEntry[]>(initialData);
+    const [entries, setEntries] = useState<Callsign[]>([]);
     const [form, setForm] = useState<typeof emptyForm>(emptyForm);
     const [editingIndex, setEditingIndex] = useState<number | null>(null);
     const formTopRef = useRef<HTMLDivElement | null>(null);
 
     const isValid = useMemo(() => form.callsign.trim().length > 0, [form.callsign]);
 
+    useEffect(() => {
+        const fetchCallsigns = async () => {
+            const allCallsigns = await getAllCallSigns();
+            setEntries(allCallsigns);
+        };
+        fetchCallsigns();
+    }, []);
+
     const startEdit = (idx: number) => {
         const e = entries[idx];
         setEditingIndex(idx);
         setForm({
+            id: e.id,
             callsign: e.callsign || "",
             name: e.name || "",
             qth: e.qth || "",
@@ -54,8 +49,9 @@ const CallsignManager: React.FC = () => {
         formTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
-    const save = () => {
-        const next: CallsignEntry = {
+    const save = async () => {
+        const next: Callsign = {
+            id: form.id,
             callsign: form.callsign.trim().toUpperCase(),
             name: form.name.trim() || undefined,
             qth: form.qth.trim() || undefined,
@@ -64,6 +60,8 @@ const CallsignManager: React.FC = () => {
             modes: parseArray(form.modesInput),
         };
         if (!next.callsign) return;
+
+        await updateCallSign(next.id, next)
 
         setEntries((s) => {
             // prevent duplicates: if adding and callsign exists, replace it

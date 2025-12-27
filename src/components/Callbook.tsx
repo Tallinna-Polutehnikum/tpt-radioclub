@@ -1,9 +1,29 @@
-import { useMemo, useState } from "react";
-import callsigns from "../assets/callsigns.json";
+import { useEffect, useMemo, useState } from "react";
+// import callsigns from "../assets/callsigns.json";
 import { Link } from "react-router-dom";
+import { getAllCallSigns } from "../database/callsigns";
+
+export type Callsign = {
+  id: number;
+  callsign: string;
+  name?: string;
+  qth?: string;
+  locator?: string;
+  bands?: string[];
+  modes?: string[];
+};
 
 const Callbook = () => {
   const [query, setQuery] = useState("");
+  const [callsigns, setCallsigns] = useState<Callsign[]>([]);
+
+  useEffect(() => {
+    const fetchCallsigns = async () => {
+      const allCallsigns = await getAllCallSigns();
+      setCallsigns(allCallsigns);
+    };
+    fetchCallsigns();
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase();
@@ -12,7 +32,7 @@ const Callbook = () => {
         .toLowerCase()
         .includes(q)
     );
-  }, [query]);
+  }, [query, callsigns]);
 
   return (
     <div className="page callbook-page">

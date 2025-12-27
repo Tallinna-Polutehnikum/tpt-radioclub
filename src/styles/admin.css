@@ -74,7 +74,6 @@
 /* Editor wrapper and default editor height */
 .editor-wrapper .ProseMirror {
   min-height: 150px; /* default height requested */
-  height: 150px;
   max-height: 60vh;
   overflow: auto;
   padding: 8px;

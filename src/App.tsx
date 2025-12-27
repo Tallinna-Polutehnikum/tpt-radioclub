@@ -14,6 +14,7 @@ import AllActivities from "./components/AllActivites";
 import Callbook from "./components/Callbook";
 import AdminApp from "./admin/AdminApp";
 import AdminLogin from "./admin/components/AdminLogin";
+import { useAuth } from "./auth/AuthContext";
 
 const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -29,6 +30,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 const AnimatedRoutes: React.FC = () => {
+  const { role } = useAuth()
   const location = useLocation();
 
   return (
@@ -88,7 +90,7 @@ const AnimatedRoutes: React.FC = () => {
             <ActivityDetail />
           </PageWrapper>} />
         <Route path="/all-activities" element={<AllActivities />} />
-        <Route path="/admin/*" element={<AdminApp />} />
+        {role === "user" && <Route path="/admin/*" element={<AdminApp />} />}
         <Route path="/login" element={<AdminLogin />} />
       </Routes>
     </AnimatePresence>

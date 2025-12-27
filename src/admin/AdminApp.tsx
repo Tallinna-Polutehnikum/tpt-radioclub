@@ -5,12 +5,6 @@ import CallsignManager from "./components/CallsignManager";
 import GalleryEditor from "./components/GalleryEditor";
 import "../styles/admin.css";
 
-/*
-  AdminApp is mounted at /admin/* (see App.tsx).
-  Use absolute paths in the sidebar links to avoid relative-link surprises.
-  The nested <Routes> declare paths relative to the /admin base.
-*/
-
 const AdminHome: React.FC = () => (
     <div className="admin-welcome page">
         <h2>Admin Panel</h2>
@@ -33,13 +27,11 @@ const AdminApp: React.FC = () => {
 
             <section className="admin-content">
                 <Routes>
-                    {/* index route: redirect to dashboard or default sub-section */}
                     <Route index element={<AdminHome />} />
                     <Route path="activities" element={<ActivitiesEditor />} />
                     <Route path="callsigns" element={<CallsignManager />} />
                     <Route path="gallery" element={<GalleryEditor />} />
 
-                    {/* if someone navigates to /admin/some-unknown -> go to dashboard */}
                     <Route path="*" element={<Navigate to="/admin" replace />} />
                 </Routes>
             </section>
