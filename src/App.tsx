@@ -16,6 +16,7 @@ import AdminApp from "./admin/AdminApp";
 import AdminLogin from "./admin/components/AdminLogin";
 import { useAuth } from "./auth/AuthContext";
 import ExpandedGallery from "./components/ExpandedGallery";
+import Meetup from "./components/Meetup";
 
 const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -97,6 +98,14 @@ const AnimatedRoutes: React.FC = () => {
         <Route path="/all-activities" element={<AllActivities />} />
         {role === "user" && <Route path="/admin/*" element={<AdminApp />} />}
         <Route path="/login" element={<AdminLogin />} />
+        <Route
+          path="/meetup"
+          element={
+            <PageWrapper>
+              <Meetup />
+            </PageWrapper>
+          }
+        />
       </Routes>
     </AnimatePresence>
   );

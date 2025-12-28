@@ -8,7 +8,7 @@ import "../styles/admin.css";
 const AdminHome: React.FC = () => (
     <div className="admin-welcome page">
         <h2>Admin Panel</h2>
-        <p>Welcome. Use the menu to manage content. These sections are placeholders for now.</p>
+        <p>Welcome. Use the menu to manage content.</p>
     </div>
 );
 

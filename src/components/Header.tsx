@@ -8,7 +8,7 @@ const Header: React.FC = () => {
     
     const linkClass = ({ isActive }: { isActive: boolean }) =>
         "nav-btn" + (isActive ? " active" : "");
-    console.log("Header render, role:", role);
+
     return (
         <header className="site-header">
             <div className="header-inner">
