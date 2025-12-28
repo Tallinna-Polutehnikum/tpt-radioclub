@@ -65,14 +65,13 @@ const ActivitiesEditor: React.FC = () => {
             try {
                 editor.commands.focus();
             } catch {
-                // ignore focus errors for safety
+                // let's ignore focus errors for safety
             }
         }
 
         loadedForIdRef.current = idKey;
     }, [editing?.id, editor]);
 
-    // clear marker when editor is closed so next open reloads
     useEffect(() => {
         if (!editing) {
             loadedForIdRef.current = null;

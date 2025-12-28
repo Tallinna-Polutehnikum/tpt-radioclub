@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createFolder, deleteFolder, getAllFolders, type Folder } from "../../database/folders";
 import { addImageToFolder, deleteImage, deleteImagesByFolderId, getImagesByFolderId, updateImageFolder, type ImageMeta } from "../../database/images";
+import { cloudinaryUploadImage } from "../../connection/cloudinary";
 
 const GalleryEditor: React.FC = () => {
     const [folders, setFolders] = useState<Folder[]>([]);
@@ -9,9 +10,6 @@ const GalleryEditor: React.FC = () => {
     const [newFolderName, setNewFolderName] = useState("");
     const [uploading, setUploading] = useState(false);
     const fileRef = useRef<HTMLInputElement | null>(null);
-
-    const cloudName = 'dsdocdfcx';
-    const uploadPreset = 'Default-Unsigned';
 
     useEffect(() => {
         const initDefaultFolderAndImages = async () => {
@@ -68,24 +66,14 @@ const GalleryEditor: React.FC = () => {
         }
         setUploading(true);
         try {
-            const form = new FormData();
-            form.append("file", file);
-            form.append("upload_preset", uploadPreset);
-            form.append("folder", String(selectedFolder.name));
-            const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, { method: "POST", body: form });
-            if (!res.ok) {
-                const txt = await res.text().catch(() => "");
-                throw new Error(`Upload failed: ${res.status} ${txt}`);
-            }
-            const json = await res.json();
-            const src = json.secure_url || json.url;
-            const public_id = json.public_id;
+            const uploadedImage = await cloudinaryUploadImage(file, selectedFolder.name);
             const meta: Partial<ImageMeta> = {
-                url: src,
+                url: uploadedImage.url,
                 filename: file.name,
-                public_id,
+                public_id: uploadedImage.public_id,
                 folder_id: selectedFolder.id
             };
+
             await saveImageMeta(meta);
         } catch (err) {
             console.error("Upload error:", err);
@@ -114,7 +102,6 @@ const GalleryEditor: React.FC = () => {
     const moveImageToFolder = async (imageId: string | number, destFolderId: number) => {
         try {
             await updateImageFolder(destFolderId, imageId);
-
             const imagesInFolder = await getImagesByFolderId(selectedFolder!.id);
             setImages(imagesInFolder);
         } catch (err) {
@@ -123,7 +110,7 @@ const GalleryEditor: React.FC = () => {
     };
 
     const deleteExistingImage = async (image: ImageMeta) => {
-        if (!window.confirm("Delete image metadata? (Cloudinary file will remain unless removed server-side)")) return;
+        if (!window.confirm("Delete image metadata?")) return;
         try {
             await deleteImage(image.id);
             const imagesInFolder = await getImagesByFolderId(selectedFolder!.id);

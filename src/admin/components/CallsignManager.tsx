@@ -64,7 +64,6 @@ const CallsignManager: React.FC = () => {
         await updateCallSign(next.id, next)
 
         setEntries((s) => {
-            // prevent duplicates: if adding and callsign exists, replace it
             const foundIndex = s.findIndex((x) => x.callsign === next.callsign);
             if (editingIndex === null) {
                 if (foundIndex !== -1) {
@@ -75,13 +74,8 @@ const CallsignManager: React.FC = () => {
                 return [next, ...s];
             } else {
                 const copy = [...s];
-                // If changed callsign collides with another entry, move/replace
                 if (foundIndex !== -1 && foundIndex !== editingIndex) {
-                    copy.splice(foundIndex, 1); // remove duplicate
-                    if (foundIndex < editingIndex) {
-                        // adjust editingIndex if earlier entry removed
-                        // (not strictly necessary here since we overwrite below)
-                    }
+                    copy.splice(foundIndex, 1);
                 }
                 copy[editingIndex] = next;
                 return copy;
