@@ -50,6 +50,18 @@ const Gallery: React.FC = () => {
             <p className="muted">Moments from TPT Radio Club activities and events</p>
 
             <div className="gallery-grid">
+                {galleryItems.map((item) => (
+                    <motion.div
+                        key={item.id}
+                        className="gallery-item"
+                        layoutId={`img-${item.id}`}
+                        onClick={() => setSelected(item)}
+                        whileHover={{ scale: 1.03 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                    >
+                        <img src={item.url} alt={item.filename} loading="lazy" />
+                    </motion.div>
+                ))}
                 {folders.map((item) => {
                     if (!item.image) {
                         return;
@@ -69,18 +81,6 @@ const Gallery: React.FC = () => {
                         </div>
                     </motion.div>
                 })}
-                {galleryItems.map((item) => (
-                    <motion.div
-                        key={item.id}
-                        className="gallery-item"
-                        layoutId={`img-${item.id}`}
-                        onClick={() => setSelected(item)}
-                        whileHover={{ scale: 1.03 }}
-                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                    >
-                        <img src={item.url} alt={item.filename} loading="lazy" />
-                    </motion.div>
-                ))}
             </div>
             <AnimatePresence>
                 {selected && (
