@@ -48,7 +48,7 @@ const main = () => {
 };
 
 const normalizeMonth = (month: string) => {
-    const monthCapitalized = month.replace(' 2025', '').toLowerCase();
+    const monthCapitalized = month.replace(' 2026', '').toLowerCase();
     const monthEt = monthCapitalized.charAt(0).toUpperCase() + monthCapitalized.slice(1);
 
     return monthTranslator(monthEt);

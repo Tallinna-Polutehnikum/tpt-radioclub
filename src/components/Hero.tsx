@@ -1,7 +1,10 @@
 import React from "react";
 import Player from "./Player";
+import { useNavigate } from "react-router-dom";
 
 const Hero: React.FC = () => {
+    const navigate = useNavigate();
+
     return (
         <section id="home" className="hero">
             <div className="hero-left">
@@ -100,7 +103,7 @@ const Hero: React.FC = () => {
                 <div className="poster">
                     <h3>Club Meetings</h3>
                     <p>Every Tuesday, 18:00 – 22:00 at <strong>Tallinn Polytech School</strong></p>
-                    <button className="cta" onClick={() => window.open('https://meshtastic.ee/en/meetups')}>Join a meeting</button>
+                    <button className="cta" onClick={() => navigate('/meetup')}>Meetups Info</button>
                 </div>
             </div>
         </section>

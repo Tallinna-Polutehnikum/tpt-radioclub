@@ -12,6 +12,11 @@ import Gallery from "./components/Gallery";
 import ActivityDetail from "./components/ActivityDetail";
 import AllActivities from "./components/AllActivites";
 import Callbook from "./components/Callbook";
+import AdminApp from "./admin/AdminApp";
+import AdminLogin from "./admin/components/AdminLogin";
+import { useAuth } from "./auth/AuthContext";
+import ExpandedGallery from "./components/ExpandedGallery";
+import Meetup from "./components/Meetup";
 
 const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -27,6 +32,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 const AnimatedRoutes: React.FC = () => {
+  const { role } = useAuth()
   const location = useLocation();
 
   return (
@@ -85,7 +91,21 @@ const AnimatedRoutes: React.FC = () => {
           <PageWrapper>
             <ActivityDetail />
           </PageWrapper>} />
+        <Route path="/gallery/:id" element={
+          <PageWrapper>
+            <ExpandedGallery />
+          </PageWrapper>} />
         <Route path="/all-activities" element={<AllActivities />} />
+        {role === "user" && <Route path="/admin/*" element={<AdminApp />} />}
+        <Route path="/login" element={<AdminLogin />} />
+        <Route
+          path="/meetup"
+          element={
+            <PageWrapper>
+              <Meetup />
+            </PageWrapper>
+          }
+        />
       </Routes>
     </AnimatePresence>
   );

@@ -1,53 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getImageForFolder, getImagesByFolderId, type ImageMeta } from "../database/images";
-import { getAllFolders } from "../database/folders";
-import { useNavigate } from "react-router-dom";
+import { getImagesByFolderId, type ImageMeta } from "../database/images";
+import { Link, useParams } from "react-router-dom";
+import { getFolderById } from "../database/folders";
 
-interface FolderDescription {
-    folderId: number;
-    description: string;
-    image: ImageMeta;
-}
-
-const Gallery: React.FC = () => {
+const ExpandedGallery: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+    
     const [selected, setSelected] = useState<ImageMeta | null>(null);
     const [galleryItems, setGalleryItems] = useState<ImageMeta[] | []>([]);
-    const [folders, setFolders] = useState<FolderDescription[]>([]);
-
-    const navigate = useNavigate();
-
-    const initGallery = async () => {
-        const folders = await getAllFolders();
-        const defaultFolderId = folders.length ? folders[0].id : null;
-        const images = await getImagesByFolderId(defaultFolderId || 0);
-
-        const foldersExceptDefault = folders.slice(1);
-        const folderImages = await Promise.all(foldersExceptDefault.map(async (f) => {
-            const img = await getImageForFolder(f.id);
-            return {
-                folderId: f.id,
-                description: f.name,
-                image: img
-            } as FolderDescription;
-        }));
-
-        setFolders(folderImages);
-        setGalleryItems(images);
-    }
+    const [title, setTitle] = useState<string>('');
 
     useEffect(() => {
-        initGallery();
-    }, []);
+        const initGallery = async () => {
+            const folder = await getFolderById(Number(id));
+            const images = await getImagesByFolderId(Number(id));
+            setGalleryItems(images);
+            setTitle(folder?.name ?? '');
+        }
 
-    const openFolder = async (folder: FolderDescription) => {
-        navigate(`/gallery/${folder.folderId}`)
-    }
+        initGallery();
+    }, [id]);
 
     return (
         <section className="page gallery">
             <h2>Photo Gallery</h2>
-            <p className="muted">Moments from TPT Radio Club activities and events</p>
+            <p className="muted">{title}</p>
 
             <div className="gallery-grid">
                 {galleryItems.map((item) => (
@@ -62,25 +40,11 @@ const Gallery: React.FC = () => {
                         <img src={item.url} alt={item.filename} loading="lazy" />
                     </motion.div>
                 ))}
-                {folders.map((item) => {
-                    if (!item.image) {
-                        return;
-                    }
-
-                    return <motion.div
-                        key={item.folderId}
-                        className="gallery-item"
-                        layoutId={`img-${item.folderId}`}
-                        onClick={() => { openFolder(item); }}
-                        whileHover={{ scale: 1.03 }}
-                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                    >
-                        <img src={item.image.url} alt={item.description} loading="lazy" />
-                        <div className="gallery-caption">
-                            <h4>{item.description}</h4>
-                        </div>
-                    </motion.div>
-                })}
+            </div>
+            <div>
+                <Link to="/gallery" className="back-link" style={{ paddingTop: 20 }}>
+                    ← Back to Gallery
+                </Link>
             </div>
             <AnimatePresence>
                 {selected && (
@@ -110,4 +74,4 @@ const Gallery: React.FC = () => {
     );
 };
 
-export default Gallery;
+export default ExpandedGallery;

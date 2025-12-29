@@ -1,9 +1,29 @@
-import { useMemo, useState } from "react";
-import callsigns from "../assets/callsigns.json";
+import { useEffect, useMemo, useState } from "react";
+// import callsigns from "../assets/callsigns.json";
 import { Link } from "react-router-dom";
+import { getAllCallSigns } from "../database/callsigns";
+
+export type Callsign = {
+  id: number;
+  callsign: string;
+  name?: string;
+  qth?: string;
+  locator?: string;
+  bands?: string[];
+  modes?: string[];
+};
 
 const Callbook = () => {
   const [query, setQuery] = useState("");
+  const [callsigns, setCallsigns] = useState<Callsign[]>([]);
+
+  useEffect(() => {
+    const fetchCallsigns = async () => {
+      const allCallsigns = await getAllCallSigns();
+      setCallsigns(allCallsigns);
+    };
+    fetchCallsigns();
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase();
@@ -12,7 +32,7 @@ const Callbook = () => {
         .toLowerCase()
         .includes(q)
     );
-  }, [query]);
+  }, [query, callsigns]);
 
   return (
     <div className="page callbook-page">
@@ -56,8 +76,16 @@ const Callbook = () => {
                     <td>{e.name}</td>
                     <td>{e.qth ?? "—"}</td>
                     <td>{e.locator ?? "—"}</td>
-                    <td>{e.bands?.join(", ") ?? "—"}</td>
-                    <td>{e.modes?.join(", ")?? "—"}</td>
+                    <td>
+                      {(e.bands || []).map((b, i) => (
+                        <span key={b + i} className="chip">{b}</span>
+                      ))}
+                    </td>
+                    <td>
+                      {(e.modes || []).map((m, i) => (
+                        <span key={m + i} className="chip">{m}</span>
+                      ))}
+                    </td>
                   </tr>
                 ))}
               </tbody>
