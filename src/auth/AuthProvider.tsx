@@ -1,69 +1,56 @@
-// src/auth/AuthProvider.tsx
-import {
-  onAuthStateChanged,
-  getIdTokenResult,
-  type User,
-} from "firebase/auth"
-import { type ReactNode, useEffect, useState } from "react"
-import { auth } from "./auth"
-import { AuthContext, type AuthContextType, type Role } from "./AuthContext"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from "react";
+import type { User } from "@supabase/supabase-js";
+import { onAuthChange, getCurrentUserAsync } from "./auth";
+import { AuthContext, type AuthContextType } from "./AuthContext";
 
-type Props = {
-  children: ReactNode
-}
-
-export const AuthProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<AuthContextType["user"]>(null)
-  const [role, setRole] = useState<Role | null>(null)
-  const [permissions, setPermissions] = useState<string[]>([])
-  const [loading, setLoading] = useState(true)
-
-  const extractClaims = async (firebaseUser: User) => {
-    const tokenResult = await getIdTokenResult(firebaseUser, true)
-    const claims = tokenResult.claims
-
-    setRole((claims.role as Role) ?? "user")
-    setPermissions((claims.permissions as string[]) ?? [])
-  }
-
-  const refreshClaims = async () => {
-    if (!auth.currentUser) return
-    await extractClaims(auth.currentUser)
-  }
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      if (!firebaseUser) {
-        setUser(null)
-        setRole(null)
-        setPermissions([])
-        setLoading(false)
-        return
+    let mounted = true;
+
+    const initUser = async () => {
+      try {
+        const currentUser = await getCurrentUserAsync();
+        if (mounted) {
+          setUser(currentUser);
+          setError(null);
+        }
+      } catch (err: any) {
+        if (mounted) {
+          setError(err?.message || "Failed to load user");
+          setUser(null);
+        }
+      } finally {
+        if (mounted) {
+          setLoading(false);
+        }
       }
+    };
 
-      setUser({
-        uid: firebaseUser.uid,
-        email: firebaseUser.email,
-      })
+    initUser();
 
-      await extractClaims(firebaseUser)
-      setLoading(false)
-    })
+    const { data } = onAuthChange((u) => {
+      if (mounted) {
+        setUser(u);
+        setError(null);
+      }
+    });
 
-    return unsubscribe
-  }, [])
+    return () => {
+      mounted = false;
+      data?.subscription?.unsubscribe();
+    };
+  }, []);
 
   const value: AuthContextType = {
     user,
-    role,
-    permissions,
     loading,
-    refreshClaims,
-  }
+    error,
+  };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
-    </AuthContext.Provider>
-  )
-}
+  return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
+};

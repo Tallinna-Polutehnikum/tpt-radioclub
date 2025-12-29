@@ -32,7 +32,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 const AnimatedRoutes: React.FC = () => {
-  const { role } = useAuth()
+  const { user } = useAuth()
   const location = useLocation();
 
   return (
@@ -96,7 +96,7 @@ const AnimatedRoutes: React.FC = () => {
             <ExpandedGallery />
           </PageWrapper>} />
         <Route path="/all-activities" element={<AllActivities />} />
-        {role === "user" && <Route path="/admin/*" element={<AdminApp />} />}
+        {user?.role === "authenticated" && <Route path="/admin/*" element={<AdminApp />} />}
         <Route path="/login" element={<AdminLogin />} />
         <Route
           path="/meetup"

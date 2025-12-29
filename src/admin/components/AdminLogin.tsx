@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { signIn, signOut, onAuthChange, getCurrentUser, setIdTokenCookie } from "../../auth/auth";
-import type { User } from "firebase/auth";
+import type { User } from "@supabase/supabase-js";
 
 type Props = {
     onAuthChange?: (user: User) => void;
@@ -16,19 +16,24 @@ const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp, adminEmai
     const [user, setUser] = useState<User | null>(getCurrentUser());
 
     useEffect(() => {
-        const unsub = onAuthChange((u) => {
+        const sub = onAuthChange((u) => {
             setUser(u);
             if (onAuthChangeProp) onAuthChangeProp(u!);
         });
-        return () => unsub();
+        return () => {
+            const anySub = sub as any;
+            if (anySub && anySub.data && anySub.data.subscription && typeof anySub.data.subscription.unsubscribe === "function") {
+                anySub.data.subscription.unsubscribe();
+            }
+        };
     }, [onAuthChangeProp]);
 
     const handleSignIn = async () => {
         setLoading(true);
         setError(null);
-        try {
+        try { 
             const result = await signIn(email.trim(), password);
-            const token = await result.user.getIdToken();
+            const token = result.session?.access_token ?? '';
             setIdTokenCookie(token);
         } catch (err: any) {
             setError(err?.message || "Sign in failed");

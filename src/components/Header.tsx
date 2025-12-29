@@ -4,11 +4,11 @@ import { Mic2, Radio } from "lucide-react";
 import { useAuth } from "../auth/AuthContext";
 
 const Header: React.FC = () => {
-    const { role } = useAuth()
+    const { user } = useAuth()
     
     const linkClass = ({ isActive }: { isActive: boolean }) =>
         "nav-btn" + (isActive ? " active" : "");
-
+    console.log("Header render, user:", user);
     return (
         <header className="site-header">
             <div className="header-inner">
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
                         <NavLink to="/callbook" className={linkClass}>
                             Callbook
                         </NavLink>
-                        {role === "user" && <NavLink to="/admin" className="nav-btn">Admin</NavLink>}
+                        {user?.role === "authenticated" && <NavLink to="/admin" className="nav-btn">Admin</NavLink>}
                     </nav>
                 </div>
 

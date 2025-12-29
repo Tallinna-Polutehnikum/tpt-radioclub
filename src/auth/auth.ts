@@ -1,71 +1,91 @@
-import { initializeApp } from "firebase/app";
-import {
-    getAuth,
-    signInWithEmailAndPassword,
-    signOut as fbSignOut,
-    onAuthStateChanged,
-    type User,
-} from "firebase/auth";
-
-const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID
-};
-
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+import { supabase } from "../database/supabase";
+import type { User } from "@supabase/supabase-js";
 
 export const signIn = async (email: string, password: string) => {
-    return await signInWithEmailAndPassword(auth, email, password);
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email.trim(),
+    password,
+  });
+
+  if (error) throw error;
+  return data;
 };
 
 export const signOut = async () => {
-    return await fbSignOut(auth);
+  const { error } = await supabase.auth.signOut();
+  if (error) throw error;
 };
 
 export const onAuthChange = (cb: (user: User | null) => void) => {
-    return onAuthStateChanged(auth, cb);
+  return supabase.auth.onAuthStateChange((_event, session) => {
+    cb(session?.user ?? null);
+  });
 };
 
-export const getCurrentUser = () => auth.currentUser;
+export const getCurrentUser = (): User | null => {
+    supabase.auth.getSession().then(({ data }) => {
+        return data.session?.user ?? null;
+    });
+    return null;
+};
 
-export function setIdTokenCookie(idToken: string, days = 1) {
-    const expires = new Date(Date.now() + days * 864e5).toUTCString();
-    const secureFlag = location.protocol === "https:" ? "; Secure" : "";
-    document.cookie = `idToken=${encodeURIComponent(idToken)}; expires=${expires}; path=/; SameSite=Lax${secureFlag}`;
+export const getSession = async () => {
+  const { data, error } = await supabase.auth.getSession();
+  if (error) throw error;
+  return data.session;
+};
+
+export const getCurrentUserAsync = async (): Promise<User | null> => {
+  const { data, error } = await supabase.auth.getUser();
+  if (error) throw error;
+  return data.user ?? null;
+};
+
+export const getAccessToken = async (): Promise<string | null> => {
+  const session = await getSession();
+  return session?.access_token ?? null;
+};
+
+export function setIdTokenCookie(token: string, days = 1) {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  const secureFlag = location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = `access_token=${encodeURIComponent(token)}; expires=${expires}; path=/; SameSite=Lax${secureFlag}`;
 }
 
 export function clearIdTokenCookie() {
-    document.cookie = `idToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax`;
+  document.cookie = `access_token=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax`;
 }
-
-onAuthStateChanged(auth, async (user) => {
-    try {
-        if (user) {
-            const token = await user.getIdToken();
-            setIdTokenCookie(token, 1); // store 1 day
-        } else {
-            clearIdTokenCookie();
-        }
-    } catch (err) {
-        console.warn("Failed to persist idToken to cookie:", err);
-    }
-});
 
 export async function isIdTokenValid(): Promise<boolean> {
-    const user = auth.currentUser;
-    if (!user) return false;
-    try {
-        const result = await user.getIdTokenResult(true);
-        if (!result?.expirationTime) return false;
-        const exp = new Date(result.expirationTime).getTime();
-        return Date.now() < exp;
-    } catch (err) {
-        console.warn("isIdTokenValid error:", err);
-        return false;
-    }
+  try {
+    const session = await getSession();
+    if (!session) return false;
+
+    const expiresAt = session.expires_at;
+    if (!expiresAt) return false;
+
+    const now = Math.floor(Date.now() / 1000);
+    return now < expiresAt;
+  } catch (err) {
+    console.warn("isIdTokenValid error:", err);
+    return false;
+  }
 }
+
+supabase.auth.onAuthStateChange(async (_event, session) => {
+  try {
+    if (session?.access_token) {
+      const expiresAt = session.expires_at;
+      let days = 1;
+      if (expiresAt) {
+        const secondsLeft = expiresAt - Math.floor(Date.now() / 1000);
+        days = Math.max(1, Math.floor(secondsLeft / 86400));
+      }
+      setIdTokenCookie(session.access_token, days);
+    } else {
+      clearIdTokenCookie();
+    }
+  } catch (err) {
+    console.warn("Failed to persist token to cookie:", err);
+  }
+});
