@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import type { Callsign } from "../../components/Callbook";
-import { getAllCallSigns, updateCallSign } from "../../database/callsigns";
+import { createCallSign, deleteCallSign, getAllCallSigns, updateCallSign } from "../../database/callsigns";
+import { omit } from "lodash";
 
 const emptyForm = {
     id: 0,
@@ -21,7 +22,7 @@ const parseArray = (s: string) =>
 const CallsignManager: React.FC = () => {
     const [entries, setEntries] = useState<Callsign[]>([]);
     const [form, setForm] = useState<typeof emptyForm>(emptyForm);
-    const [editingIndex, setEditingIndex] = useState<number | null>(null);
+    const [isEditing, setIsEditing] = useState(false);
     const formTopRef = useRef<HTMLDivElement | null>(null);
 
     const isValid = useMemo(
@@ -37,17 +38,16 @@ const CallsignManager: React.FC = () => {
         fetchCallsigns();
     }, []);
 
-    const startEdit = (idx: number) => {
-        const e = entries[idx];
-        setEditingIndex(idx);
+    const startEdit = (entry: Callsign) => {
+        setIsEditing(true);
         setForm({
-            id: e.id,
-            callsign: e.callsign || "",
-            name: e.name || "",
-            qth: e.qth || "",
-            locator: e.locator || "",
-            bandsInput: (e.bands || []).join(", "),
-            modesInput: (e.modes || []).join(", "),
+            id: entry.id,
+            callsign: entry.callsign || "",
+            name: entry.name || "",
+            qth: entry.qth || "",
+            locator: entry.locator || "",
+            bandsInput: (entry.bands || []).join(", "),
+            modesInput: (entry.modes || []).join(", "),
         });
         formTopRef.current?.scrollIntoView({
             behavior: "smooth",
@@ -65,49 +65,42 @@ const CallsignManager: React.FC = () => {
             bands: parseArray(form.bandsInput),
             modes: parseArray(form.modesInput),
         };
-        if (!next.callsign) return;
 
-        await updateCallSign(next.id, next);
+        if (!next.callsign) {
+            return;
+        }
 
-        setEntries((s) => {
-            const foundIndex = s.findIndex((x) => x.callsign === next.callsign);
-            if (editingIndex === null) {
-                if (foundIndex !== -1) {
-                    const copy = [...s];
-                    copy[foundIndex] = next;
-                    return copy;
-                }
-                return [next, ...s];
-            } else {
-                const copy = [...s];
-                if (foundIndex !== -1 && foundIndex !== editingIndex) {
-                    copy.splice(foundIndex, 1);
-                }
-                copy[editingIndex] = next;
-                return copy;
-            }
-        });
+        if (form.id === 0) {
+            await createCallSign(omit(next, 'id'));
+        } else {
+            await updateCallSign(next.id, next);
+        }
 
+        const allCallsigns = await getAllCallSigns();
+        setEntries(allCallsigns);
         setForm(emptyForm);
-        setEditingIndex(null);
-        console.log(
-            editingIndex === null
-                ? "Added callsign (placeholder):"
-                : "Updated callsign (placeholder):",
-            next
-        );
+        setIsEditing(false);
     };
 
-    const remove = (idx: number) => {
-        const entry = entries[idx];
-        const confirmed = window.confirm(`Remove callsign ${entry.callsign}?`);
-        if (!confirmed) return;
-        setEntries((s) => s.filter((_, i) => i !== idx));
-        if (editingIndex === idx) {
-            setEditingIndex(null);
-            setForm(emptyForm);
+    const remove = async (id: number) => {
+        const entry = entries.find(entry => entry.id === id);
+
+        if (!entry) {
+            return;
         }
-        console.log("Removed callsign (placeholder):", entry);
+
+        const confirmed = window.confirm(`Remove callsign ${entry.callsign}?`);
+
+        if (!confirmed) {
+            return;
+        }
+
+        await deleteCallSign(entry.id);
+
+        const allCallsigns = await getAllCallSigns();
+        setEntries(allCallsigns);
+
+        setForm(emptyForm);
     };
 
     return (
@@ -204,13 +197,13 @@ const CallsignManager: React.FC = () => {
 
                 <div className="form-actions">
                     <button className="cta" onClick={save} disabled={!isValid}>
-                        {editingIndex === null ? "Add" : "Save"}
+                        {isEditing ? "Save" : "Add"}
                     </button>
                     <button
                         className="cta-outline"
                         onClick={() => {
                             setForm(emptyForm);
-                            setEditingIndex(null);
+                            setIsEditing(false);
                         }}
                         style={{ marginLeft: 8 }}
                     >
@@ -233,8 +226,8 @@ const CallsignManager: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {entries.map((e, idx) => (
-                            <tr key={`${e.callsign}-${idx}`}>
+                        {entries.map((e) => (
+                            <tr key={`${e.callsign}-${e.id}`}>
                                 <td className="callsign">{e.callsign}</td>
                                 <td>{e.name || "—"}</td>
                                 <td>{e.qth || "—"}</td>
@@ -256,13 +249,13 @@ const CallsignManager: React.FC = () => {
                                 <td style={{ textAlign: "right" }}>
                                     <button
                                         className="cta-outline"
-                                        onClick={() => startEdit(idx)}
+                                        onClick={() => startEdit(e)}
                                     >
                                         Edit
                                     </button>
                                     <button
                                         className="cta-outline"
-                                        onClick={() => remove(idx)}
+                                        onClick={() => remove(e.id)}
                                         style={{ marginLeft: 8 }}
                                     >
                                         Remove
