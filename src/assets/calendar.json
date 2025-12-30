@@ -1,657 +1,652 @@
 [
-  {
-    "month": "January",
-    "events": [
-      {
-        "date": "04 Jan",
-        "time": "08:00-08:59",
-        "desc": "ES LL KV 1. etapp"
-      },
-      {
-        "date": "07 Jan",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "09 Jan",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "12 Jan",
-        "time": "06:30-08:29",
-        "desc": "NRAU Baltic Contest"
-      },
-      {
-        "date": "12 Jan",
-        "time": "09:00-10:59",
-        "desc": "NRAU Baltic Contest"
-      },
-      {
-        "date": "14 Jan",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "16 Jan",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "21 Jan",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "24-26 Jan",
-        "time": "22:00-21:59",
-        "desc": "CQ WW 160 Meter Contest"
-      },
-      {
-        "date": "28 Jan",
-        "time": "18:00-21:59",
-        "desc": "NAC Micro"
-      }
-    ]
-  },
-  {
-    "month": "February",
-    "events": [
-      {
-        "date": "01 Feb",
-        "time": "Algus 10:30 EA",
-        "desc": "ERAÜ Talvepäev"
-      },
-      {
-        "date": "04 Feb",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "08 Feb",
-        "time": "08:00-08:59",
-        "desc": "ES LL KV 2. etapp"
-      },
-      {
-        "date": "08-09 Feb",
-        "time": "00:00-23:59",
-        "desc": "CQ WW RTTY WPX Contest"
-      },
-      {
-        "date": "11 Feb",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "13 Feb",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "15-16 Feb",
-        "time": "00:00-23:59",
-        "desc": "ARRL DX Contest"
-      },
-      {
-        "date": "18 Feb",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "20 Feb",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "21-23 Feb",
-        "time": "22:00-21:59",
-        "desc": "CQ WW 160 Meter Contest"
-      },
-      {
-        "date": "25 Feb",
-        "time": "18:00-21:59",
-        "desc": "NAC Micro"
-      }
-    ]
-  },
-  {
-    "month": "March",
-    "events": [
-      {
-        "date": "01 Mar",
-        "time": "08:00-08:59",
-        "desc": "ES LL KV 3. etapp"
-      },
-      {
-        "date": "01-02 Mar",
-        "time": "00:00-23:59",
-        "desc": "ARRL DX Contest"
-      },
-      {
-        "date": "04 Mar",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "08 Mar",
-        "time": "06:00-06:44",
-        "desc": "ES käsivõtmevõistlus 1. etapp"
-      },
-      {
-        "date": "11 Mar",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "13 Mar",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "18 Mar",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "20 Mar",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "25 Mar",
-        "time": "18:00-21:59",
-        "desc": "NAC Micro"
-      },
-      {
-        "date": "29-30 Mar",
-        "time": "00:00-23:59",
-        "desc": "CQ WW WPX Contest"
-      }
-    ]
-  },
-  {
-    "month": "April",
-    "events": [
-      {
-        "date": "01 Apr",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "05 Apr",
-        "time": "algus 10:00 EA",
-        "desc": "OHDXF & CCF DX & Contest meeting (Tallinn)"
-      },
-      {
-        "date": "05 Apr",
-        "time": "07:00-07:59",
-        "desc": "ES LL KV 4. etapp"
-      },
-      {
-        "date": "08 Apr",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "10 Apr",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "15 Apr",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "17 Apr",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "19 Apr",
-        "time": "05:00-08:59",
-        "desc": "ES Open HF Championship"
-      },
-      {
-        "date": "26 Apr",
-        "time": "Algus 11:00 EA",
-        "desc": "ERAÜ üldkoosolek"
-      },
-      {
-        "date": "29 Apr",
-        "time": "17:00-20:59",
-        "desc": "NAC Micro"
-      }
-    ]
-  },
-  {
-    "month": "May",
-    "events": [
-      {
-        "date": "03 May",
-        "time": "07:00-07:59",
-        "desc": "ES LL KV 5. etapp"
-      },
-      {
-        "date": "06 May",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "08 May",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "13 May",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "15 May",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "17-18 May",
-        "time": "21:00-01:59",
-        "desc": "Baltic Contest"
-      },
-      {
-        "date": "20 May",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "24-25 May",
-        "time": "00:00-23:59",
-        "desc": "CQ WW WPX Contest"
-      },
-      {
-        "date": "27 May",
-        "time": "17:00-20:59",
-        "desc": "NAC Micro"
-      }
-    ]
-  },
-  {
-    "month": "June",
-    "events": [
-      {
-        "date": "03 Jun",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "07 Jun",
-        "time": "13.00-14.29",
-        "desc": "ES LL välipäev"
-      },
-      {
-        "date": "10 Jun",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "12 Jun",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "14 Jun",
-        "time": "05:00-05:44",
-        "desc": "ES käsivõtmevõistlus 2. etapp"
-      },
-      {
-        "date": "21-22 Jun",
-        "time": "14:00-13:59",
-        "desc": "IARU REG1 50MHz Contest"
-      },
-      {
-        "date": "17 Jun",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "19 Jun",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "24 Jun",
-        "time": "17:00-20:59",
-        "desc": "NAC Micro"
-      },
-      {
-        "date": "27-29 Jun",
-        "time": "",
-        "desc": "ERAÜ 62. suvine kokkutulek"
-      }
-    ]
-  },
-  {
-    "month": "July",
-    "events": [
-      {
-        "date": "01 Jul",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "08 Jul",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "10 Jul",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "12-13 Jul",
-        "time": "12:00-11:59",
-        "desc": "IARU HF Championship"
-      },
-      {
-        "date": "15 Jul",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "17 Jul",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "22 Jul",
-        "time": "17:00-20:59",
-        "desc": "NAC Micro"
-      },
-      {
-        "date": "26-27 Jul",
-        "time": "12:00-11:59",
-        "desc": "IOTA Contest"
-      }
-    ]
-  },
-  {
-    "month": "August",
-    "events": [
-      {
-        "date": "02 Aug",
-        "time": "12:00-23:59",
-        "desc": "European HF Championship"
-      },
-      {
-        "date": "05 Aug",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "09-10 Aug",
-        "time": "00:00-23:59",
-        "desc": "WAE DX Contest"
-      },
-      {
-        "date": "12 Aug",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "14 Aug",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "16 Aug",
-        "time": "15:00-21:00",
-        "desc": "ES ULL MV/Baltic VUSHFC"
-      },
-      {
-        "date": "19 Aug",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "21 Aug",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "26 Aug",
-        "time": "17:00-20:59",
-        "desc": "NAC Micro"
-      },
-      {
-        "date": "30-31 Aug",
-        "time": "12:00-11:59",
-        "desc": "WW Digi DX Contest"
-      }
-    ]
-  },
-  {
-    "month": "September",
-    "events": [
-      {
-        "date": "02 Sep",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "06 Sep",
-        "time": "07:00-07.59",
-        "desc": "ES LL KV 6. etapp"
-      },
-      {
-        "date": "06-07 Sep",
-        "time": "14:00-13:59",
-        "desc": "IARU REG1 VHF Contest"
-      },
-      {
-        "date": "09 Sep",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "11 Sep",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "13 Sep",
-        "time": "05:00-05:44",
-        "desc": "ES käsivõtmevõistlus 3. etapp"
-      },
-      {
-        "date": "13-14 Sep",
-        "time": "00:00-23:59",
-        "desc": "WAE DX Contest"
-      },
-      {
-        "date": "16 Sep",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "18 Sep",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "20-21 Sep",
-        "time": "12:00-11:59",
-        "desc": "SAC - Scandinavian Activity Contest"
-      },
-      {
-        "date": "23 Sep",
-        "time": "17:00-20:59",
-        "desc": "NAC Micro"
-      },
-      {
-        "date": "27-28 Sep",
-        "time": "00:00-23:59",
-        "desc": "CQ WW RTTY DX Contest"
-      }
-    ]
-  },
-  {
-    "month": "October",
-    "events": [
-      {
-        "date": "04 Oct",
-        "time": "07:00-07.59",
-        "desc": "ES LL KV 7. etapp"
-      },
-      {
-        "date": "04-05 Oct",
-        "time": "14:00-13:59",
-        "desc": "IARU REG1 UHF/Microwave contest"
-      },
-      {
-        "date": "07 Oct",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "09 Oct",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "11-12 Oct",
-        "time": "12:00-11:59",
-        "desc": "SAC - Scandinavian Activity Contest"
-      },
-      {
-        "date": "14 Oct",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "16 Oct",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "18-19 Oct",
-        "time": "15:00-14:59",
-        "desc": "Worked all Germany Contest"
-      },
-      {
-        "date": "21 Oct",
-        "time": "17:00-20:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "25-26 Oct",
-        "time": "00:00-23:59",
-        "desc": "CQ WW DX Contest"
-      },
-      {
-        "date": "28 Oct",
-        "time": "17:00-20:59",
-        "desc": "NAC Micro"
-      }
-    ]
-  },
-  {
-    "month": "November",
-    "events": [
-      {
-        "date": "01 Nov",
-        "time": "08:00-08.59",
-        "desc": "ES LL KV 8. etapp"
-      },
-      {
-        "date": "04 Nov",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "08-09 Nov",
-        "time": "00:00-23.59",
-        "desc": "WAE DX Contest RTTY"
-      },
-      {
-        "date": "11 Nov",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "13 Nov",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "18 Nov",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "20 Nov",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "25 Nov",
-        "time": "18:00-21:59",
-        "desc": "NAC Micro"
-      },
-      {
-        "date": "29-30 Nov",
-        "time": "00:00-23:59",
-        "desc": "CQ WW DX Contest"
-      }
-    ]
-  },
-  {
-    "month": "December",
-    "events": [
-      {
-        "date": "02 Dec",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 144"
-      },
-      {
-        "date": "06 Dec",
-        "time": "08:00-08.59",
-        "desc": "ES LL KV 9. etapp"
-      },
-      {
-        "date": "09 Dec",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 432"
-      },
-      {
-        "date": "11 Dec",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 50"
-      },
-      {
-        "date": "13 Dec",
-        "time": "07:30-08:14",
-        "desc": "ES käsivõtmevõistlus 4. etapp"
-      },
-      {
-        "date": "13-14 Dec",
-        "time": "00:00-23:59",
-        "desc": "ARRL 10 Meter Contest"
-      },
-      {
-        "date": "16 Dec",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 1296"
-      },
-      {
-        "date": "18 Dec",
-        "time": "18:00-21:59",
-        "desc": "ES ULL KV 70"
-      },
-      {
-        "date": "23 Dec",
-        "time": "18:00-21:59",
-        "desc": "NAC Micro"
-      }
-    ]
-  }
+    {
+        "month": "January",
+        "events": [
+            {
+                "date": "03 Jan",
+                "time": "08:00-08:59",
+                "desc": "ES LL KV 1. etapp"
+            },
+            {
+                "date": "06 Jan",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "08 Jan",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "11 Jan",
+                "time": "06:00-07:59",
+                "desc": "NRAU Baltic Contest"
+            },
+            {
+                "date": "11 Jan",
+                "time": "08:30-10:29",
+                "desc": "NRAU Baltic Contest"
+            },
+            {
+                "date": "13 Jan",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "15 Jan",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "20 Jan",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "23-25 Jan",
+                "time": "22:00-21:59",
+                "desc": "CQ WW 160 Meter Contest"
+            },
+            {
+                "date": "27 Jan",
+                "time": "18:00-21:59",
+                "desc": "NAC Micro"
+            }
+        ]
+    },
+    {
+        "month": "February",
+        "events": [
+            {
+                "date": "03 Feb",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "07 Feb",
+                "time": "Algus 10:00 EA",
+                "desc": "ERAÜ Talvepäev"
+            },
+            {
+                "date": "10 Feb",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "12 Feb",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "14 Feb",
+                "time": "08:00-08:59",
+                "desc": "ES LL KV 2. etapp"
+            },
+            {
+                "date": "14-15 Feb",
+                "time": "00:00-23:59",
+                "desc": "CQ WW RTTY WPX Contest"
+            },
+            {
+                "date": "17 Feb",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "19 Feb",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "21-22 Feb",
+                "time": "00:00-23:59",
+                "desc": "ARRL DX Contest"
+            },
+            {
+                "date": "24 Feb",
+                "time": "18:00-21:59",
+                "desc": "NAC Micro"
+            },
+            {
+                "date": "27-02 Feb",
+                "time": "22:00-21:59",
+                "desc": "CQ WW 160 Meter Contest"
+            }
+        ]
+    },
+    {
+        "month": "March",
+        "events": [
+            {
+                "date": "03 Mar",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "07 Mar",
+                "time": "08:00-08:59",
+                "desc": "ES LL KV 3. etapp"
+            },
+            {
+                "date": "07-08 Mar",
+                "time": "00:00-23:59",
+                "desc": "ARRL DX Contest"
+            },
+            {
+                "date": "10 Mar",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "12 Mar",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "14 Mar",
+                "time": "07:30-08:14",
+                "desc": "ES käsivõtmevõistlus 1. etapp"
+            },
+            {
+                "date": "17 Mar",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "19 Mar",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "24 Mar",
+                "time": "18:00-21:59",
+                "desc": "NAC Micro"
+            },
+            {
+                "date": "28-29 Mar",
+                "time": "00:00-23:59",
+                "desc": "CQ WW WPX Contest"
+            }
+        ]
+    },
+    {
+        "month": "April",
+        "events": [
+            {
+                "date": "04 Apr",
+                "time": "07:00-07:59",
+                "desc": "ES LL KV 4. etapp"
+            },
+            {
+                "date": "07 Apr",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "09 Apr",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "11 Apr",
+                "time": "Algus 11:00 EA",
+                "desc": "ERAÜ üldkoosolek"
+            },
+            {
+                "date": "14 Apr",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "16 Apr",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "18 Apr",
+                "time": "05:00-08:59",
+                "desc": "ES Open HF Championship"
+            },
+            {
+                "date": "21 Apr",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "28 Apr",
+                "time": "17:00-20:59",
+                "desc": "NAC Micro"
+            }
+        ]
+    },
+    {
+        "month": "May",
+        "events": [
+            {
+                "date": "02 May",
+                "time": "07:00-07:59",
+                "desc": "ES LL KV 5. etapp"
+            },
+            {
+                "date": "05 May",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "12 May",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "14 May",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "16-17 May",
+                "time": "21:00-01:59",
+                "desc": "Baltic Contest"
+            },
+            {
+                "date": "19 May",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "21 May",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "26 May",
+                "time": "17:00-20:59",
+                "desc": "NAC Micro"
+            },
+            {
+                "date": "30-31 May",
+                "time": "00:00-23:59",
+                "desc": "CQ WW WPX Contest"
+            }
+        ]
+    },
+    {
+        "month": "June",
+        "events": [
+            {
+                "date": "02 Jun",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "06 Jun",
+                "time": "13.00-14.29",
+                "desc": "ES LL välipäev"
+            },
+            {
+                "date": "09 Jun",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "11 Jun",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "13 Jun",
+                "time": "06:30-07:14",
+                "desc": "ES käsivõtmevõistlus 2. etapp"
+            },
+            {
+                "date": "16 Jun",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "18 Jun",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "20-21 Jun",
+                "time": "14:00-13:59",
+                "desc": "IARU REG1 50MHz Contest"
+            },
+            {
+                "date": "23 Jun",
+                "time": "17:00-20:59",
+                "desc": "NAC Micro"
+            },
+            {
+                "date": "26-28 Jun",
+                "time": "",
+                "desc": "ERAÜ 63. suvine kokkutulek"
+            }
+        ]
+    },
+    {
+        "month": "July",
+        "events": [
+            {
+                "date": "07 Jul",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "09 Jul",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "11-12 Jul",
+                "time": "12:00-11:59",
+                "desc": "IARU HF Championship + WRTC-26"
+            },
+            {
+                "date": "14 Jul",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "16 Jul",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "21 Jul",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "25-26 Jul",
+                "time": "12:00-11:59",
+                "desc": "IOTA Contest"
+            },
+            {
+                "date": "28 Jul",
+                "time": "17:00-20:59",
+                "desc": "NAC Micro"
+            }
+        ]
+    },
+    {
+        "month": "August",
+        "events": [
+            {
+                "date": "01 Aug",
+                "time": "12:00-23:59",
+                "desc": "European HF Championship"
+            },
+            {
+                "date": "04 Aug",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "08-09 Aug",
+                "time": "00:00-23:59",
+                "desc": "WAE DX Contest"
+            },
+            {
+                "date": "11 Aug",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "13 Aug",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "15 Aug",
+                "time": "15:00-21:00",
+                "desc": "ES ULL MV/Baltic VUSHFC"
+            },
+            {
+                "date": "18 Aug",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "20 Aug",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "25 Aug",
+                "time": "17:00-20:59",
+                "desc": "NAC Micro"
+            },
+            {
+                "date": "29-30 Aug",
+                "time": "12:00-11:59",
+                "desc": "WW Digi DX Contest"
+            }
+        ]
+    },
+    {
+        "month": "September",
+        "events": [
+            {
+                "date": "01 Sep",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "05 Sep",
+                "time": "07:00-07.59",
+                "desc": "ES LL KV 6. etapp"
+            },
+            {
+                "date": "05-06 Sep",
+                "time": "14:00-13:59",
+                "desc": "IARU REG1 VHF Contest"
+            },
+            {
+                "date": "08 Sep",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "10 Sep",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "12-13 Sep",
+                "time": "00:00-23:59",
+                "desc": "WAE DX Contest"
+            },
+            {
+                "date": "12 Sep",
+                "time": "06:30-07:14",
+                "desc": "ES käsivõtmevõistlus 3. etapp"
+            },
+            {
+                "date": "15 Sep",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "17 Sep",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "19-20 Sep",
+                "time": "12:00-11:59",
+                "desc": "SAC - Scandinavian Activity Contest"
+            },
+            {
+                "date": "22 Sep",
+                "time": "17:00-20:59",
+                "desc": "NAC Micro"
+            },
+            {
+                "date": "26-27 Sep",
+                "time": "00:00-23:59",
+                "desc": "CQ WW RTTY DX Contest"
+            }
+        ]
+    },
+    {
+        "month": "October",
+        "events": [
+            {
+                "date": "03 Oct",
+                "time": "07:00-07.59",
+                "desc": "ES LL KV 7. etapp"
+            },
+            {
+                "date": "03-04 Oct",
+                "time": "14:00-13:59",
+                "desc": "IARU REG1 UHF/Microwave contest"
+            },
+            {
+                "date": "06 Oct",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "08 Oct",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "10-11 Oct",
+                "time": "12:00-11:59",
+                "desc": "SAC - Scandinavian Activity Contest"
+            },
+            {
+                "date": "13 Oct",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "15 Oct",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "17-18 Oct",
+                "time": "15:00-14:59",
+                "desc": "Worked all Germany Contest"
+            },
+            {
+                "date": "20 Oct",
+                "time": "17:00-20:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "24-25 Oct",
+                "time": "00:00-23:59",
+                "desc": "CQ WW DX Contest"
+            },
+            {
+                "date": "27 Oct",
+                "time": "17:00-20:59",
+                "desc": "NAC Micro"
+            }
+        ]
+    },
+    {
+        "month": "November",
+        "events": [
+            {
+                "date": "03 Nov",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "07 Nov",
+                "time": "08:00-08.59",
+                "desc": "ES LL KV 8. etapp"
+            },
+            {
+                "date": "10 Nov",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "12 Nov",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "14-15 Nov",
+                "time": "00:00-23.59",
+                "desc": "WAE DX Contest RTTY"
+            },
+            {
+                "date": "17 Nov",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "19 Nov",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "24 Nov",
+                "time": "18:00-21:59",
+                "desc": "NAC Micro"
+            },
+            {
+                "date": "28-29 Nov",
+                "time": "00:00-23:59",
+                "desc": "CQ WW DX Contest"
+            }
+        ]
+    },
+    {
+        "month": "December",
+        "events": [
+            {
+                "date": "01 Dec",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 144"
+            },
+            {
+                "date": "05 Dec",
+                "time": "08:00-08.59",
+                "desc": "ES LL KV 9. etapp"
+            },
+            {
+                "date": "08 Dec",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 432"
+            },
+            {
+                "date": "10 Dec",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 50"
+            },
+            {
+                "date": "12 Dec",
+                "time": "07:30-08:14",
+                "desc": "ES käsivõtmevõistlus 4. etapp"
+            },
+            {
+                "date": "12-13 Dec",
+                "time": "00:00-23:59",
+                "desc": "ARRL 10 Meter Contest"
+            },
+            {
+                "date": "15 Dec",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 1296"
+            },
+            {
+                "date": "17 Dec",
+                "time": "18:00-21:59",
+                "desc": "ES ULL KV 70"
+            },
+            {
+                "date": "22 Dec",
+                "time": "18:00-21:59",
+                "desc": "NAC Micro"
+            }
+        ]
+    }
 ]

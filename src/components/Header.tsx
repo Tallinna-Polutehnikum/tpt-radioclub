@@ -1,15 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Mic2, Radio } from "lucide-react";
+import { useAuth } from "../auth/AuthContext";
 
 const Header: React.FC = () => {
+    const { user } = useAuth();
+
     const linkClass = ({ isActive }: { isActive: boolean }) =>
         "nav-btn" + (isActive ? " active" : "");
 
     return (
         <header className="site-header">
             <div className="header-inner">
-
                 <div className="header-side left">
                     <Mic2 size={42} className="header-icon mic" />
                 </div>
@@ -20,7 +22,7 @@ const Header: React.FC = () => {
                         <p className="brand-sub">Shortwave from Tallinn</p>
                     </NavLink>
 
-                    <nav className="main-nav">
+                    <nav className="main-nav" aria-label="Main navigation">
                         <NavLink to="/" end className={linkClass}>
                             Home
                         </NavLink>
@@ -39,6 +41,11 @@ const Header: React.FC = () => {
                         <NavLink to="/callbook" className={linkClass}>
                             Callbook
                         </NavLink>
+                        {user && (
+                            <NavLink to="/admin" className="nav-btn">
+                                Admin
+                            </NavLink>
+                        )}
                     </nav>
                 </div>
 

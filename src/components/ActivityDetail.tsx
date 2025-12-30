@@ -1,30 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import type { Activity } from "./Activities";
 import { useLocation } from "react-router-dom";
-import activities from "../assets/activites.json";
-
-
-const activityData = parseActivitiesArray(activities);
-
-function parseActivitiesArray(
-    arr: Activity[]
-): Record<string, { title: string; date: string; content: string; image: string }> {
-    return arr.reduce((acc, curr) => {
-        acc[curr.id] = {
-            title: curr.title,
-            date: curr.date,
-            content: curr.content,
-            image: curr.image
-        };
-        return acc;
-    }, {} as Record<string, { title: string; date: string; content: string; image: string }>);
-}
+import { getActivityById } from "../database/activities";
+import type { Activity } from "./Activities";
 
 const ActivityDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const location = useLocation();
-    const activity = activityData[id || ""];
+    const [activity, setActivity] = useState({} as Activity);
+
+    useEffect(() => {
+        const fetchActivity = async () => {
+            if (id) {
+                const data = await getActivityById(id);
+                if (!data) return;
+                setActivity(data);
+            }
+        };
+        fetchActivity();
+    }, [id]);
 
     if (!activity) {
         return (
@@ -39,7 +33,14 @@ const ActivityDetail: React.FC = () => {
 
     return (
         <div className="activity-detail">
-            <Link to={location.state.shouldReturnToAllActivities ? "/all-activities" : "/activities"} className="back-link">
+            <Link
+                to={
+                    location.state.shouldReturnToAllActivities
+                        ? "/all-activities"
+                        : "/activities"
+                }
+                className="back-link"
+            >
                 ← Back to Activities
             </Link>
             <div className="activity-header">
@@ -49,8 +50,10 @@ const ActivityDetail: React.FC = () => {
                     <p className="activity-date">{activity.date}</p>
                 </div>
             </div>
-            <div className="activity-content" dangerouslySetInnerHTML={{ __html: activity.content }}>
-            </div>
+            <div
+                className="activity-content"
+                dangerouslySetInnerHTML={{ __html: activity.content }}
+            ></div>
         </div>
     );
 };

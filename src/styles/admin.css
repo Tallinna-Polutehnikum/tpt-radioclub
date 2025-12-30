@@ -1,0 +1,190 @@
+/* admin panel styles, re-uses variables from global.css */
+.admin-layout {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    min-height: 70vh;
+    padding: 18px;
+}
+
+.admin-sidebar {
+    width: 220px;
+    background: var(--panel);
+    border: 2px solid rgba(59, 43, 36, 0.06);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.admin-logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-link {
+    padding: 8px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--dark);
+}
+
+.admin-link.active {
+    background: linear-gradient(90deg, rgba(166, 58, 42, 0.08), transparent);
+    border-left: 4px solid var(--accent);
+    padding-left: 6px;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.admin-content {
+    flex: 1;
+    min-height: 400px;
+}
+
+.admin-welcome {
+    padding: 12px;
+}
+
+.admin-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid rgba(74, 47, 38, 0.12);
+    background: var(--panel);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--dark);
+    outline: none;
+    box-shadow: none;
+    transition:
+        border-color 0.12s ease,
+        box-shadow 0.12s ease;
+}
+
+.admin-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px rgba(168, 59, 42, 0.06);
+}
+
+/* Editor wrapper and default editor height */
+.editor-wrapper .ProseMirror {
+    min-height: 150px; /* default height requested */
+    max-height: 60vh;
+    overflow: auto;
+    padding: 8px;
+    background: var(--body);
+    border-radius: 6px;
+}
+
+/* Improve default ProseMirror typography */
+.editor-wrapper .ProseMirror p {
+    margin: 0 0 0.75rem 0;
+    line-height: 1.5;
+    color: var(--dark);
+}
+
+/* Callsign manager layout fixes */
+.callsign-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.callbook-search {
+    flex: 1;
+    min-width: 160px;
+}
+
+/* Form layout for detailed callsign entry */
+.callsign-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    align-items: end;
+    margin-bottom: 16px;
+    padding: 6px 0;
+}
+
+.form-row label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--muted, #6b6b6b);
+    margin-bottom: 6px;
+}
+
+.form-row input.admin-input {
+    width: 100%;
+}
+
+/* form actions align full width on small screens */
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* chips for bands/modes */
+.chip {
+    display: inline-block;
+    background: rgba(74, 47, 38, 0.06);
+    color: var(--dark);
+    padding: 4px 8px;
+    border-radius: 999px;
+    margin-right: 6px;
+    font-size: 0.85rem;
+}
+
+/* Table styling for consistent alignment */
+.callbook-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+}
+
+.callbook-table th,
+.callbook-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(74, 47, 38, 0.06);
+    vertical-align: middle;
+}
+
+.callbook-table thead th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.callsign {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* responsive tweaks */
+@media (max-width: 820px) {
+    .callsign-form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        justify-content: flex-start;
+    }
+
+    .callbook-table td:nth-child(5),
+    .callbook-table td:nth-child(6) {
+        display: none; /* hide bands/modes for small screens to keep table readable */
+    }
+
+    .callbook-table thead th:nth-child(5),
+    .callbook-table thead th:nth-child(6) {
+        display: none;
+    }
+}
