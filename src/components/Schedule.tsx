@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import calendar from '../assets/calendar.json';
+import calendar from "../assets/calendar.json";
 
 type ScheduleItem = {
     date: string;
@@ -18,18 +18,20 @@ type MonthData = {
 
 const schedules: Record<string, ScheduleItem[]> = {};
 
- (calendar as MonthData[]).forEach((monthData) => {
-            schedules[monthData.month] = monthData.events.map((event) => ({
-                date: event.date,
-                event: event.desc,
-                time: event.time,
-            }));
-        });
+(calendar as MonthData[]).forEach((monthData) => {
+    schedules[monthData.month] = monthData.events.map((event) => ({
+        date: event.date,
+        event: event.desc,
+        time: event.time,
+    }));
+});
 
 const monthList = Object.keys(schedules);
 
 const Schedule: React.FC = () => {
-    const [selectedMonth, setSelectedMonth] = useState<string>(new Date().toLocaleString('default', { month: 'long' }));
+    const [selectedMonth, setSelectedMonth] = useState<string>(
+        new Date().toLocaleString("default", { month: "long" })
+    );
 
     const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedMonth(e.target.value);

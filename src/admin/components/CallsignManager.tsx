@@ -24,7 +24,10 @@ const CallsignManager: React.FC = () => {
     const [editingIndex, setEditingIndex] = useState<number | null>(null);
     const formTopRef = useRef<HTMLDivElement | null>(null);
 
-    const isValid = useMemo(() => form.callsign.trim().length > 0, [form.callsign]);
+    const isValid = useMemo(
+        () => form.callsign.trim().length > 0,
+        [form.callsign]
+    );
 
     useEffect(() => {
         const fetchCallsigns = async () => {
@@ -46,7 +49,10 @@ const CallsignManager: React.FC = () => {
             bandsInput: (e.bands || []).join(", "),
             modesInput: (e.modes || []).join(", "),
         });
-        formTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        formTopRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
     };
 
     const save = async () => {
@@ -61,7 +67,7 @@ const CallsignManager: React.FC = () => {
         };
         if (!next.callsign) return;
 
-        await updateCallSign(next.id, next)
+        await updateCallSign(next.id, next);
 
         setEntries((s) => {
             const foundIndex = s.findIndex((x) => x.callsign === next.callsign);
@@ -84,7 +90,12 @@ const CallsignManager: React.FC = () => {
 
         setForm(emptyForm);
         setEditingIndex(null);
-        console.log(editingIndex === null ? "Added callsign (placeholder):" : "Updated callsign (placeholder):", next);
+        console.log(
+            editingIndex === null
+                ? "Added callsign (placeholder):"
+                : "Updated callsign (placeholder):",
+            next
+        );
     };
 
     const remove = (idx: number) => {
@@ -103,13 +114,19 @@ const CallsignManager: React.FC = () => {
         <div>
             <h3 className="page-title">Manage Callsigns</h3>
 
-            <div className="callsign-form" ref={formTopRef} style={{ paddingLeft: 100 }}>
+            <div
+                className="callsign-form"
+                ref={formTopRef}
+                style={{ paddingLeft: 100 }}
+            >
                 <div className="form-row">
                     <label>Callsign</label>
                     <input
                         className="admin-input"
                         value={form.callsign}
-                        onChange={(e) => setForm((f) => ({ ...f, callsign: e.target.value }))}
+                        onChange={(e) =>
+                            setForm((f) => ({ ...f, callsign: e.target.value }))
+                        }
                         placeholder="ES1ABC"
                         onKeyDown={(e) => {
                             if (e.key === "Enter" && isValid) {
@@ -124,7 +141,9 @@ const CallsignManager: React.FC = () => {
                     <input
                         className="admin-input"
                         value={form.name}
-                        onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                        onChange={(e) =>
+                            setForm((f) => ({ ...f, name: e.target.value }))
+                        }
                         placeholder="Operator name"
                     />
                 </div>
@@ -134,7 +153,9 @@ const CallsignManager: React.FC = () => {
                     <input
                         className="admin-input"
                         value={form.qth}
-                        onChange={(e) => setForm((f) => ({ ...f, qth: e.target.value }))}
+                        onChange={(e) =>
+                            setForm((f) => ({ ...f, qth: e.target.value }))
+                        }
                         placeholder="Tallinn"
                     />
                 </div>
@@ -144,7 +165,9 @@ const CallsignManager: React.FC = () => {
                     <input
                         className="admin-input"
                         value={form.locator}
-                        onChange={(e) => setForm((f) => ({ ...f, locator: e.target.value }))}
+                        onChange={(e) =>
+                            setForm((f) => ({ ...f, locator: e.target.value }))
+                        }
                         placeholder="KO29KL"
                     />
                 </div>
@@ -154,7 +177,12 @@ const CallsignManager: React.FC = () => {
                     <input
                         className="admin-input"
                         value={form.bandsInput}
-                        onChange={(e) => setForm((f) => ({ ...f, bandsInput: e.target.value }))}
+                        onChange={(e) =>
+                            setForm((f) => ({
+                                ...f,
+                                bandsInput: e.target.value,
+                            }))
+                        }
                         placeholder="HF, VHF, UHF"
                     />
                 </div>
@@ -164,7 +192,12 @@ const CallsignManager: React.FC = () => {
                     <input
                         className="admin-input"
                         value={form.modesInput}
-                        onChange={(e) => setForm((f) => ({ ...f, modesInput: e.target.value }))}
+                        onChange={(e) =>
+                            setForm((f) => ({
+                                ...f,
+                                modesInput: e.target.value,
+                            }))
+                        }
                         placeholder="SSB, FT8, CW"
                     />
                 </div>
@@ -208,17 +241,30 @@ const CallsignManager: React.FC = () => {
                                 <td>{e.locator || "—"}</td>
                                 <td>
                                     {(e.bands || []).map((b, i) => (
-                                        <span key={b + i} className="chip">{b}</span>
+                                        <span key={b + i} className="chip">
+                                            {b}
+                                        </span>
                                     ))}
                                 </td>
                                 <td>
                                     {(e.modes || []).map((m, i) => (
-                                        <span key={m + i} className="chip">{m}</span>
+                                        <span key={m + i} className="chip">
+                                            {m}
+                                        </span>
                                     ))}
                                 </td>
                                 <td style={{ textAlign: "right" }}>
-                                    <button className="cta-outline" onClick={() => startEdit(idx)}>Edit</button>
-                                    <button className="cta-outline" onClick={() => remove(idx)} style={{ marginLeft: 8 }}>
+                                    <button
+                                        className="cta-outline"
+                                        onClick={() => startEdit(idx)}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        className="cta-outline"
+                                        onClick={() => remove(idx)}
+                                        style={{ marginLeft: 8 }}
+                                    >
                                         Remove
                                     </button>
                                 </td>
@@ -226,7 +272,14 @@ const CallsignManager: React.FC = () => {
                         ))}
                         {entries.length === 0 && (
                             <tr>
-                                <td colSpan={7} style={{ textAlign: "center", padding: 20, color: "var(--muted, #666)" }}>
+                                <td
+                                    colSpan={7}
+                                    style={{
+                                        textAlign: "center",
+                                        padding: 20,
+                                        color: "var(--muted, #666)",
+                                    }}
+                                >
                                     No callsigns
                                 </td>
                             </tr>

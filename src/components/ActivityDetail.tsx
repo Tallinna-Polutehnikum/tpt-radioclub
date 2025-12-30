@@ -18,7 +18,7 @@ const ActivityDetail: React.FC = () => {
             }
         };
         fetchActivity();
-     }, [id]);
+    }, [id]);
 
     if (!activity) {
         return (
@@ -33,7 +33,14 @@ const ActivityDetail: React.FC = () => {
 
     return (
         <div className="activity-detail">
-            <Link to={location.state.shouldReturnToAllActivities ? "/all-activities" : "/activities"} className="back-link">
+            <Link
+                to={
+                    location.state.shouldReturnToAllActivities
+                        ? "/all-activities"
+                        : "/activities"
+                }
+                className="back-link"
+            >
                 ← Back to Activities
             </Link>
             <div className="activity-header">
@@ -43,8 +50,10 @@ const ActivityDetail: React.FC = () => {
                     <p className="activity-date">{activity.date}</p>
                 </div>
             </div>
-            <div className="activity-content" dangerouslySetInnerHTML={{ __html: activity.content }}>
-            </div>
+            <div
+                className="activity-content"
+                dangerouslySetInnerHTML={{ __html: activity.content }}
+            ></div>
         </div>
     );
 };

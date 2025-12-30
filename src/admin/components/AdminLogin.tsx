@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { signIn, onAuthChange, getCurrentUser, setIdTokenCookie } from "../../auth/auth";
+import {
+    signIn,
+    onAuthChange,
+    getCurrentUser,
+    setIdTokenCookie,
+} from "../../auth/auth";
 import type { User } from "@supabase/supabase-js";
 import { Navigate } from "react-router";
 
@@ -23,7 +28,12 @@ const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp }) => {
         });
         return () => {
             const anySub = sub as any;
-            if (anySub && anySub.data && anySub.data.subscription && typeof anySub.data.subscription.unsubscribe === "function") {
+            if (
+                anySub &&
+                anySub.data &&
+                anySub.data.subscription &&
+                typeof anySub.data.subscription.unsubscribe === "function"
+            ) {
                 anySub.data.subscription.unsubscribe();
             }
         };
@@ -34,7 +44,7 @@ const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp }) => {
         setError(null);
         try {
             const result = await signIn(email.trim(), password);
-            const token = result.session?.access_token ?? '';
+            const token = result.session?.access_token ?? "";
             setIdTokenCookie(token);
         } catch (err: any) {
             setError(err?.message || "Sign in failed");
@@ -52,7 +62,11 @@ const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp }) => {
             <div style={{ maxWidth: 520 }}>
                 <h3 className="page-title">Admin sign in</h3>
 
-                <label style={{ display: "block", marginTop: 8, marginBottom: 4 }}>Email</label>
+                <label
+                    style={{ display: "block", marginTop: 8, marginBottom: 4 }}
+                >
+                    Email
+                </label>
                 <input
                     className="admin-input"
                     value={email}
@@ -61,7 +75,11 @@ const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp }) => {
                     autoComplete="username"
                 />
 
-                <label style={{ display: "block", marginTop: 8, marginBottom: 4 }}>Password</label>
+                <label
+                    style={{ display: "block", marginTop: 8, marginBottom: 4 }}
+                >
+                    Password
+                </label>
                 <input
                     className="admin-input"
                     type="password"
@@ -70,14 +88,23 @@ const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp }) => {
                     placeholder="password"
                     autoComplete="current-password"
                     onKeyDown={(e) => {
-                        if (e.key === "Enter" && email && password) handleSignIn();
+                        if (e.key === "Enter" && email && password)
+                            handleSignIn();
                     }}
                 />
 
-                {error && <div style={{ color: "crimson", marginTop: 8 }}>{error}</div>}
+                {error && (
+                    <div style={{ color: "crimson", marginTop: 8 }}>
+                        {error}
+                    </div>
+                )}
 
                 <div style={{ marginTop: 12, display: "flex", gap: 8 }}>
-                    <button className="cta" onClick={handleSignIn} disabled={loading || !email || !password}>
+                    <button
+                        className="cta"
+                        onClick={handleSignIn}
+                        disabled={loading || !email || !password}
+                    >
                         {loading ? "Signing in..." : "Sign in"}
                     </button>
                     <button

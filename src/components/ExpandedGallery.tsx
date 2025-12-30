@@ -6,18 +6,18 @@ import { getFolderById } from "../database/folders";
 
 const ExpandedGallery: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    
+
     const [selected, setSelected] = useState<ImageMeta | null>(null);
     const [galleryItems, setGalleryItems] = useState<ImageMeta[] | []>([]);
-    const [title, setTitle] = useState<string>('');
+    const [title, setTitle] = useState<string>("");
 
     useEffect(() => {
         const initGallery = async () => {
             const folder = await getFolderById(Number(id));
             const images = await getImagesByFolderId(Number(id));
             setGalleryItems(images);
-            setTitle(folder?.name ?? '');
-        }
+            setTitle(folder?.name ?? "");
+        };
 
         initGallery();
     }, [id]);
@@ -35,14 +35,26 @@ const ExpandedGallery: React.FC = () => {
                         layoutId={`img-${item.id}`}
                         onClick={() => setSelected(item)}
                         whileHover={{ scale: 1.03 }}
-                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 200,
+                            damping: 20,
+                        }}
                     >
-                        <img src={item.url} alt={item.filename} loading="lazy" />
+                        <img
+                            src={item.url}
+                            alt={item.filename}
+                            loading="lazy"
+                        />
                     </motion.div>
                 ))}
             </div>
             <div>
-                <Link to="/gallery" className="back-link" style={{ paddingTop: 20 }}>
+                <Link
+                    to="/gallery"
+                    className="back-link"
+                    style={{ paddingTop: 20 }}
+                >
                     ← Back to Gallery
                 </Link>
             </div>
@@ -61,11 +73,20 @@ const ExpandedGallery: React.FC = () => {
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
-                            transition={{ type: "spring", damping: 20, stiffness: 250 }}
+                            transition={{
+                                type: "spring",
+                                damping: 20,
+                                stiffness: 250,
+                            }}
                             onClick={(e) => e.stopPropagation()}
                         >
                             <img src={selected.url} alt={selected.filename} />
-                            <button className="close-btn" onClick={() => setSelected(null)}>✕</button>
+                            <button
+                                className="close-btn"
+                                onClick={() => setSelected(null)}
+                            >
+                                ✕
+                            </button>
                         </motion.div>
                     </motion.div>
                 )}

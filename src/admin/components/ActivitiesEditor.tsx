@@ -42,7 +42,11 @@ const ActivitiesEditor: React.FC = () => {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
     const editor = useEditor({
-        extensions: [StarterKit, Link.configure({ openOnClick: true, autolink: true }), Image],
+        extensions: [
+            StarterKit,
+            Link.configure({ openOnClick: true, autolink: true }),
+            Image,
+        ],
         content: "<p></p>",
     });
 
@@ -51,14 +55,20 @@ const ActivitiesEditor: React.FC = () => {
     useEffect(() => {
         if (!editor) return;
 
-        const idKey = editing && (editing as any).id ? String((editing as any).id) : "__new__";
+        const idKey =
+            editing && (editing as any).id
+                ? String((editing as any).id)
+                : "__new__";
 
         if (loadedForIdRef.current === idKey) return;
 
         const content = editing?.content || editing?.content || "<p></p>";
         editor.commands.setContent(content);
 
-        const editorIsFocused = typeof (editor as any).isFocused === "function" ? (editor as any).isFocused() : false;
+        const editorIsFocused =
+            typeof (editor as any).isFocused === "function"
+                ? (editor as any).isFocused()
+                : false;
         const activeTag = document.activeElement?.tagName?.toLowerCase();
         const activeIsInput = activeTag === "input" || activeTag === "textarea";
 
@@ -138,7 +148,10 @@ const ActivitiesEditor: React.FC = () => {
         setSaving(true);
         setError(null);
         try {
-            const updated = await updateActivity(changed.id as unknown as string, changed);
+            const updated = await updateActivity(
+                changed.id as unknown as string,
+                changed
+            );
             if (updated) {
                 const data = await getAllActivities();
                 setActivities(data);
@@ -192,7 +205,9 @@ const ActivitiesEditor: React.FC = () => {
         supabaseUploadImage(file, "activities")
             .then(async (res) => {
                 if (res.error) {
-                    alert(`Upload failed: ${res.error.name} ${res.error.message}`);
+                    alert(
+                        `Upload failed: ${res.error.name} ${res.error.message}`
+                    );
                     return;
                 }
                 return res.url;
@@ -201,8 +216,10 @@ const ActivitiesEditor: React.FC = () => {
                 if (!url) return;
 
                 if (editor) {
-                    setEditing({...editing, image: url});
-                    window.alert("Image uploaded successfully. It has been added to the activity data.");
+                    setEditing({ ...editing, image: url });
+                    window.alert(
+                        "Image uploaded successfully. It has been added to the activity data."
+                    );
                 }
             })
 
@@ -229,13 +246,28 @@ const ActivitiesEditor: React.FC = () => {
             ) : (
                 <div style={{ display: "grid", gap: 12 }}>
                     {activities.map((a) => (
-                        <div key={(a.id || Math.random()) as string} className="activity-card" style={{ padding: 12 }}>
+                        <div
+                            key={(a.id || Math.random()) as string}
+                            className="activity-card"
+                            style={{ padding: 12 }}
+                        >
                             <div className="activity-info">
                                 <h4>{a.title}</h4>
                                 <p className="muted">{a.description}</p>
                                 <div style={{ marginTop: 8 }}>
-                                    <button className="cta-outline" onClick={() => startEdit(a)}>Edit</button>
-                                    <button className="cta-outline" onClick={() => remove(a.id)} style={{ marginLeft: 8 }}>Delete</button>
+                                    <button
+                                        className="cta-outline"
+                                        onClick={() => startEdit(a)}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        className="cta-outline"
+                                        onClick={() => remove(a.id)}
+                                        style={{ marginLeft: 8 }}
+                                    >
+                                        Delete
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -247,42 +279,147 @@ const ActivitiesEditor: React.FC = () => {
                 <div className="page" style={{ marginTop: 16 }}>
                     <h4>Edit: {editing.title}</h4>
 
-                    <label style={{ display: "block", marginTop: 8 }}>Title</label>
+                    <label style={{ display: "block", marginTop: 8 }}>
+                        Title
+                    </label>
                     <input
                         className="admin-input"
                         value={editing.title || ""}
-                        onChange={(e) => setEditing({ ...editing, title: e.target.value })}
+                        onChange={(e) =>
+                            setEditing({ ...editing, title: e.target.value })
+                        }
                         style={{ marginTop: 6 }}
                     />
 
-                    <label style={{ display: "block", marginTop: 8 }}>Description</label>
+                    <label style={{ display: "block", marginTop: 8 }}>
+                        Description
+                    </label>
                     <input
                         className="admin-input"
                         value={editing.description || ""}
-                        onChange={(e) => setEditing({ ...editing, description: e.target.value })}
+                        onChange={(e) =>
+                            setEditing({
+                                ...editing,
+                                description: e.target.value,
+                            })
+                        }
                         style={{ marginTop: 6 }}
                     />
 
-                    <label style={{ display: "block", marginTop: 12 }}>Body</label>
+                    <label style={{ display: "block", marginTop: 12 }}>
+                        Body
+                    </label>
 
-                    <div style={{ margin: "8px 0", display: "flex", alignItems: "center", gap: 6 }}>
-                        <ToolbarButton onClick={() => editor?.chain().focus().toggleBold().run()} active={!!editor?.isActive("bold")} title="Bold">B</ToolbarButton>
-                        <ToolbarButton onClick={() => editor?.chain().focus().toggleItalic().run()} active={!!editor?.isActive("italic")} title="Italic">I</ToolbarButton>
-                        <ToolbarButton onClick={() => editor?.chain().focus().toggleStrike().run()} active={!!editor?.isActive("strike")} title="Strike">S</ToolbarButton>
-                        <ToolbarButton onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()} active={!!editor?.isActive("heading", { level: 2 })} title="H2">H2</ToolbarButton>
-                        <ToolbarButton onClick={() => editor?.chain().focus().toggleBulletList().run()} active={!!editor?.isActive("bulletList")} title="Bullet">•</ToolbarButton>
-                        <ToolbarButton onClick={() => editor?.chain().focus().toggleOrderedList().run()} active={!!editor?.isActive("orderedList")} title="Ordered">1.</ToolbarButton>
-                        <ToolbarButton onClick={() => {
-                            const url = window.prompt("URL");
-                            if (url) editor?.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
-                        }} title="Link">🔗</ToolbarButton>
-                        <ToolbarButton onClick={triggerFileSelect} title="Upload image">
+                    <div
+                        style={{
+                            margin: "8px 0",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 6,
+                        }}
+                    >
+                        <ToolbarButton
+                            onClick={() =>
+                                editor?.chain().focus().toggleBold().run()
+                            }
+                            active={!!editor?.isActive("bold")}
+                            title="Bold"
+                        >
+                            B
+                        </ToolbarButton>
+                        <ToolbarButton
+                            onClick={() =>
+                                editor?.chain().focus().toggleItalic().run()
+                            }
+                            active={!!editor?.isActive("italic")}
+                            title="Italic"
+                        >
+                            I
+                        </ToolbarButton>
+                        <ToolbarButton
+                            onClick={() =>
+                                editor?.chain().focus().toggleStrike().run()
+                            }
+                            active={!!editor?.isActive("strike")}
+                            title="Strike"
+                        >
+                            S
+                        </ToolbarButton>
+                        <ToolbarButton
+                            onClick={() =>
+                                editor
+                                    ?.chain()
+                                    .focus()
+                                    .toggleHeading({ level: 2 })
+                                    .run()
+                            }
+                            active={!!editor?.isActive("heading", { level: 2 })}
+                            title="H2"
+                        >
+                            H2
+                        </ToolbarButton>
+                        <ToolbarButton
+                            onClick={() =>
+                                editor?.chain().focus().toggleBulletList().run()
+                            }
+                            active={!!editor?.isActive("bulletList")}
+                            title="Bullet"
+                        >
+                            •
+                        </ToolbarButton>
+                        <ToolbarButton
+                            onClick={() =>
+                                editor
+                                    ?.chain()
+                                    .focus()
+                                    .toggleOrderedList()
+                                    .run()
+                            }
+                            active={!!editor?.isActive("orderedList")}
+                            title="Ordered"
+                        >
+                            1.
+                        </ToolbarButton>
+                        <ToolbarButton
+                            onClick={() => {
+                                const url = window.prompt("URL");
+                                if (url)
+                                    editor
+                                        ?.chain()
+                                        .focus()
+                                        .extendMarkRange("link")
+                                        .setLink({ href: url })
+                                        .run();
+                            }}
+                            title="Link"
+                        >
+                            🔗
+                        </ToolbarButton>
+                        <ToolbarButton
+                            onClick={triggerFileSelect}
+                            title="Upload image"
+                        >
                             {uploadingImage ? "Uploading…" : "🖼️"}
                         </ToolbarButton>
-                        <ToolbarButton onClick={() => editor?.chain().focus().clearNodes().run()} title="Clear">Clear</ToolbarButton>
+                        <ToolbarButton
+                            onClick={() =>
+                                editor?.chain().focus().clearNodes().run()
+                            }
+                            title="Clear"
+                        >
+                            Clear
+                        </ToolbarButton>
                     </div>
 
-                    <div className="editor-wrapper" style={{ border: "1px solid rgba(0,0,0,0.06)", borderRadius: 6, padding: 10, background: "var(--panel)" }}>
+                    <div
+                        className="editor-wrapper"
+                        style={{
+                            border: "1px solid rgba(0,0,0,0.06)",
+                            borderRadius: 6,
+                            padding: 10,
+                            background: "var(--panel)",
+                        }}
+                    >
                         <EditorContent editor={editor} />
                     </div>
 
@@ -300,13 +437,22 @@ const ActivitiesEditor: React.FC = () => {
                             onClick={async () => {
                                 if (!editing) return;
                                 const html = editor?.getHTML() || "";
-                                await saveEdit({ ...editing, content: html } as Activity);
+                                await saveEdit({
+                                    ...editing,
+                                    content: html,
+                                } as Activity);
                             }}
                             disabled={saving}
                         >
                             {saving ? "Saving..." : "Save"}
                         </button>
-                        <button style={{ marginLeft: 8 }} onClick={() => setEditing(null)} className="cta">Cancel</button>
+                        <button
+                            style={{ marginLeft: 8 }}
+                            onClick={() => setEditing(null)}
+                            className="cta"
+                        >
+                            Cancel
+                        </button>
                     </div>
                 </div>
             )}

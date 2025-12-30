@@ -27,7 +27,9 @@ const AllActivities: React.FC = () => {
                     <div className="activity-info">
                         <h2>{act.title}</h2>
                         <p className="activity-date">{act.date}</p>
-                        <p className="activity-description">{act.description}</p>
+                        <p className="activity-description">
+                            {act.description}
+                        </p>
                     </div>
                 </Link>
             ))}

@@ -4,15 +4,14 @@ import { Mic2, Radio } from "lucide-react";
 import { useAuth } from "../auth/AuthContext";
 
 const Header: React.FC = () => {
-    const { user, isTokenValid } = useAuth()
+    const { user } = useAuth();
 
     const linkClass = ({ isActive }: { isActive: boolean }) =>
         "nav-btn" + (isActive ? " active" : "");
-    
+
     return (
         <header className="site-header">
             <div className="header-inner">
-
                 <div className="header-side left">
                     <Mic2 size={42} className="header-icon mic" />
                 </div>
@@ -42,7 +41,11 @@ const Header: React.FC = () => {
                         <NavLink to="/callbook" className={linkClass}>
                             Callbook
                         </NavLink>
-                        {user && isTokenValid && <NavLink to="/admin" className="nav-btn">Admin</NavLink>}
+                        {user && (
+                            <NavLink to="/admin" className="nav-btn">
+                                Admin
+                            </NavLink>
+                        )}
                     </nav>
                 </div>
 

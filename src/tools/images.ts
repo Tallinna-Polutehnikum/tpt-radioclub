@@ -10,9 +10,13 @@ export interface SupabaseRequestResult {
 
 export const getSupabasePublicUrl = (path: string, gallery: string): string => {
     return `${SUPABASE_STORAGE_URL}/storage/v1/object/public/${gallery}/${path}`;
-}
+};
 
-export const supabaseUploadImage = async (file: File, folder: string, gallery: string = "gallery"): Promise<SupabaseRequestResult> => {
+export const supabaseUploadImage = async (
+    file: File,
+    folder: string,
+    gallery: string = "gallery"
+): Promise<SupabaseRequestResult> => {
     const { data, error } = await supabase.storage
         .from(gallery)
         .upload(`${folder}/${file.name}`, file);
@@ -23,16 +27,16 @@ export const supabaseUploadImage = async (file: File, folder: string, gallery: s
     }
 
     return { url: getSupabasePublicUrl(data.path, gallery), error: null };
-}
+};
 
-export const supabaseDeleteImage = async (path: string, gallery: string = "gallery"): Promise<void> => {
-    const { error } = await supabase
-        .storage
-        .from(gallery)
-        .remove([path])
+export const supabaseDeleteImage = async (
+    path: string,
+    gallery: string = "gallery"
+): Promise<void> => {
+    const { error } = await supabase.storage.from(gallery).remove([path]);
 
     if (error) {
         console.error("Supabase storage delete error:", error);
         return;
     }
-}
+};
