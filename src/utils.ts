@@ -2,8 +2,18 @@ import { signOut } from "./auth/auth";
 
 export function formatDate(input: string | Date): string {
     const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
     ];
 
     let year: number, month: number, day: number;
@@ -27,7 +37,8 @@ export function formatDate(input: string | Date): string {
         month = Number(m[2]) - 1;
         day = Number(m[3]);
 
-        if (month < 0 || month > 11 || day < 1 || day > 31) throw new Error("Invalid date components");
+        if (month < 0 || month > 11 || day < 1 || day > 31)
+            throw new Error("Invalid date components");
     } else {
         throw new Error("Unsupported input type");
     }
@@ -36,14 +47,17 @@ export function formatDate(input: string | Date): string {
 }
 
 export const checkToken = (): { isValid: boolean } => {
-    const accessToken = document.cookie.split('; ').find(row => row.startsWith('access_token='))?.replace('access_token=', '');
-    
+    const accessToken = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("access_token="))
+        ?.replace("access_token=", "");
+
     if (!accessToken) {
         return { isValid: false };
     }
 
     try {
-        const payload = JSON.parse(atob(accessToken.split('.')[1]));
+        const payload = JSON.parse(atob(accessToken.split(".")[1]));
         const now = Math.floor(Date.now() / 1000);
 
         if (now > payload.exp + 100) {
@@ -55,4 +69,4 @@ export const checkToken = (): { isValid: boolean } => {
         console.warn("isTokenValid error:", err);
         return { isValid: false };
     }
-}
+};

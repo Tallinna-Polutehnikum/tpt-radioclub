@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getImageForFolder, getImagesByFolderId, type ImageMeta } from "../database/images";
+import {
+    getImageForFolder,
+    getImagesByFolderId,
+    type ImageMeta,
+} from "../database/images";
 import { getAllFolders } from "../database/folders";
 import { useNavigate } from "react-router-dom";
 
@@ -23,31 +27,35 @@ const Gallery: React.FC = () => {
         const images = await getImagesByFolderId(defaultFolderId || 0);
 
         const foldersExceptDefault = folders.slice(1);
-        const folderImages = await Promise.all(foldersExceptDefault.map(async (f) => {
-            const img = await getImageForFolder(f.id);
-            return {
-                folderId: f.id,
-                description: f.name,
-                image: img
-            } as FolderDescription;
-        }));
+        const folderImages = await Promise.all(
+            foldersExceptDefault.map(async (f) => {
+                const img = await getImageForFolder(f.id);
+                return {
+                    folderId: f.id,
+                    description: f.name,
+                    image: img,
+                } as FolderDescription;
+            })
+        );
 
         setFolders(folderImages);
         setGalleryItems(images);
-    }
+    };
 
     useEffect(() => {
         initGallery();
     }, []);
 
     const openFolder = async (folder: FolderDescription) => {
-        navigate(`/gallery/${folder.folderId}`)
-    }
+        navigate(`/gallery/${folder.folderId}`);
+    };
 
     return (
         <section className="page gallery">
             <h2>Photo Gallery</h2>
-            <p className="muted">Moments from TPT Radio Club activities and events</p>
+            <p className="muted">
+                Moments from TPT Radio Club activities and events
+            </p>
 
             <div className="gallery-grid">
                 {galleryItems.map((item) => (
@@ -57,9 +65,17 @@ const Gallery: React.FC = () => {
                         layoutId={`img-${item.id}`}
                         onClick={() => setSelected(item)}
                         whileHover={{ scale: 1.03 }}
-                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 200,
+                            damping: 20,
+                        }}
                     >
-                        <img src={item.url} alt={item.filename} loading="lazy" />
+                        <img
+                            src={item.url}
+                            alt={item.filename}
+                            loading="lazy"
+                        />
                     </motion.div>
                 ))}
                 {folders.map((item) => {
@@ -67,19 +83,31 @@ const Gallery: React.FC = () => {
                         return;
                     }
 
-                    return <motion.div
-                        key={item.folderId}
-                        className="gallery-item"
-                        layoutId={`img-${item.folderId}`}
-                        onClick={() => { openFolder(item); }}
-                        whileHover={{ scale: 1.03 }}
-                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                    >
-                        <img src={item.image.url} alt={item.description} loading="lazy" />
-                        <div className="gallery-caption">
-                            <h4>{item.description}</h4>
-                        </div>
-                    </motion.div>
+                    return (
+                        <motion.div
+                            key={item.folderId}
+                            className="gallery-item"
+                            layoutId={`img-${item.folderId}`}
+                            onClick={() => {
+                                openFolder(item);
+                            }}
+                            whileHover={{ scale: 1.03 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 200,
+                                damping: 20,
+                            }}
+                        >
+                            <img
+                                src={item.image.url}
+                                alt={item.description}
+                                loading="lazy"
+                            />
+                            <div className="gallery-caption">
+                                <h4>{item.description}</h4>
+                            </div>
+                        </motion.div>
+                    );
                 })}
             </div>
             <AnimatePresence>
@@ -97,11 +125,20 @@ const Gallery: React.FC = () => {
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
-                            transition={{ type: "spring", damping: 20, stiffness: 250 }}
+                            transition={{
+                                type: "spring",
+                                damping: 20,
+                                stiffness: 250,
+                            }}
                             onClick={(e) => e.stopPropagation()}
                         >
                             <img src={selected.url} alt={selected.filename} />
-                            <button className="close-btn" onClick={() => setSelected(null)}>✕</button>
+                            <button
+                                className="close-btn"
+                                onClick={() => setSelected(null)}
+                            >
+                                ✕
+                            </button>
                         </motion.div>
                     </motion.div>
                 )}

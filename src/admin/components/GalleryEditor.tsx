@@ -1,7 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
-import { createFolder, deleteFolder, getAllFolders, type Folder } from "../../database/folders";
-import { addImageToFolder, deleteImage, deleteImagesByFolderId, getImagesByFolderId, updateImageFolder, type ImageMeta } from "../../database/images";
+import {
+    createFolder,
+    deleteFolder,
+    getAllFolders,
+    type Folder,
+} from "../../database/folders";
+import {
+    addImageToFolder,
+    deleteImage,
+    deleteImagesByFolderId,
+    getImagesByFolderId,
+    updateImageFolder,
+    type ImageMeta,
+} from "../../database/images";
 import { supabaseDeleteImage, supabaseUploadImage } from "../../tools/images";
+
 
 const GalleryEditor: React.FC = () => {
     const [folders, setFolders] = useState<Folder[]>([]);
@@ -20,10 +33,15 @@ const GalleryEditor: React.FC = () => {
 
                 setFolders(folders);
                 setImages(images);
-                setSelectedFolder((prev) => (prev ? prev : (folders[0] || { id: "root", name: "Default" })));
+                setSelectedFolder((prev) =>
+                    prev ? prev : folders[0] || { id: "root", name: "Default" }
+                );
                 return;
             } catch (err) {
-                console.warn("Supabase gallery load failed, falling back to localStorage", err);
+                console.warn(
+                    "Supabase gallery load failed, falling back to localStorage",
+                    err
+                );
                 return;
             }
         };
@@ -69,14 +87,16 @@ const GalleryEditor: React.FC = () => {
             const result = await supabaseUploadImage(file, selectedFolder.name);
 
             if (result.error || !result.url) {
-                window.alert(`Upload failed: ${result.error?.message || "unknown error"}`);
+                window.alert(
+                    `Upload failed: ${result.error?.message || "unknown error"}`
+                );
                 return;
             }
 
             const meta: Partial<ImageMeta> = {
                 url: result.url,
                 filename: file.name,
-                folder_id: selectedFolder.id
+                folder_id: selectedFolder.id,
             };
 
             await saveImageMeta(meta);
@@ -103,10 +123,15 @@ const GalleryEditor: React.FC = () => {
         }
     };
 
-    const moveImageToFolder = async (imageId: string | number, destFolderId: number) => {
+    const moveImageToFolder = async (
+        imageId: string | number,
+        destFolderId: number
+    ) => {
         try {
             await updateImageFolder(destFolderId, imageId);
-            const imagesInFolder = await getImagesByFolderId(selectedFolder!.id);
+            const imagesInFolder = await getImagesByFolderId(
+                selectedFolder!.id
+            );
             setImages(imagesInFolder);
         } catch (err) {
             console.warn("Supabase move image failed:", err);
@@ -114,13 +139,16 @@ const GalleryEditor: React.FC = () => {
     };
 
     const deleteExistingImage = async (image: ImageMeta) => {
-        if (!window.confirm("Delete image metadata?")) 
-            return;
+        if (!window.confirm("Delete image metadata?")) return;
 
         try {
-            await supabaseDeleteImage(`${selectedFolder?.name}/${image.filename}`);
+            await supabaseDeleteImage(
+                `${selectedFolder?.name}/${image.filename}`
+            );
             await deleteImage(image.id);
-            const imagesInFolder = await getImagesByFolderId(selectedFolder!.id);
+            const imagesInFolder = await getImagesByFolderId(
+                selectedFolder!.id
+            );
             setImages(imagesInFolder);
         } catch (err) {
             console.warn("Supabase delete image failed:", err);
@@ -131,7 +159,7 @@ const GalleryEditor: React.FC = () => {
         const imagesInFolder = await getImagesByFolderId(folder.id);
         setSelectedFolder(folder);
         setImages(imagesInFolder);
-    }
+    };
 
     return (
         <div className="page">
@@ -140,16 +168,63 @@ const GalleryEditor: React.FC = () => {
             <div style={{ display: "flex", gap: 16 }}>
                 <aside style={{ width: 240 }}>
                     <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-                        <input className="admin-input" placeholder="New folder" value={newFolderName} onChange={(e) => setNewFolderName(e.target.value)} />
-                        <button className="cta" onClick={() => { createNewFolder(newFolderName); setNewFolderName(""); }}>Create</button>
+                        <input
+                            className="admin-input"
+                            placeholder="New folder"
+                            value={newFolderName}
+                            onChange={(e) => setNewFolderName(e.target.value)}
+                        />
+                        <button
+                            className="cta"
+                            onClick={() => {
+                                createNewFolder(newFolderName);
+                                setNewFolderName("");
+                            }}
+                        >
+                            Create
+                        </button>
                     </div>
 
-                    <div style={{ background: "var(--panel)", padding: 8, borderRadius: 8 }}>
+                    <div
+                        style={{
+                            background: "var(--panel)",
+                            padding: 8,
+                            borderRadius: 8,
+                        }}
+                    >
                         {folders.map((f) => (
-                            <div key={String(f.id)} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "6px 8px", borderRadius: 6, marginBottom: 6, background: selectedFolder?.id === f.id ? "rgba(168,59,42,0.06)" : "transparent", cursor: "pointer" }}>
-                                <div onClick={() => switchFolder(f)} style={{ flex: 1 }}>{f.name}</div>
+                            <div
+                                key={String(f.id)}
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                    padding: "6px 8px",
+                                    borderRadius: 6,
+                                    marginBottom: 6,
+                                    background:
+                                        selectedFolder?.id === f.id
+                                            ? "rgba(168,59,42,0.06)"
+                                            : "transparent",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                <div
+                                    onClick={() => switchFolder(f)}
+                                    style={{ flex: 1 }}
+                                >
+                                    {f.name}
+                                </div>
                                 <div>
-                                    <button className="cta-outline" onClick={() => deleteExistingFolder(f.id)} title="Delete folder">✕</button>
+                                    <button
+                                        className="cta-outline"
+                                        onClick={() =>
+                                            deleteExistingFolder(f.id)
+                                        }
+                                        title="Delete folder"
+                                    >
+                                        ✕
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -157,36 +232,140 @@ const GalleryEditor: React.FC = () => {
                 </aside>
 
                 <main style={{ flex: 1 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            marginBottom: 12,
+                        }}
+                    >
                         <div>
                             <strong>{selectedFolder?.name || "—"}</strong>
-                            <div style={{ fontSize: 12, color: "var(--muted)" }}>{images.length} images</div>
+                            <div
+                                style={{ fontSize: 12, color: "var(--muted)" }}
+                            >
+                                {images.length} images
+                            </div>
                         </div>
 
-                        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                            <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={(e) => uploadFiles(e.target.files)} />
-                            <button className="cta" onClick={() => fileRef.current?.click()} disabled={!selectedFolder || uploading}>{uploading ? "Uploading…" : "Upload image"}</button>
+                        <div
+                            style={{
+                                display: "flex",
+                                gap: 8,
+                                alignItems: "center",
+                            }}
+                        >
+                            <input
+                                ref={fileRef}
+                                type="file"
+                                accept="image/*"
+                                style={{ display: "none" }}
+                                onChange={(e) => uploadFiles(e.target.files)}
+                            />
+                            <button
+                                className="cta"
+                                onClick={() => fileRef.current?.click()}
+                                disabled={!selectedFolder || uploading}
+                            >
+                                {uploading ? "Uploading…" : "Upload image"}
+                            </button>
                         </div>
                     </div>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px,1fr))", gap: 12 }}>
+                    <div
+                        style={{
+                            display: "grid",
+                            gridTemplateColumns:
+                                "repeat(auto-fill, minmax(220px,1fr))",
+                            gap: 12,
+                        }}
+                    >
                         {images.map((img) => (
-                            <div key={String(img.id)} style={{ background: "var(--panel)", padding: 8, borderRadius: 8 }}>
-                                <div style={{ height: 140, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 8 }}>
-                                    <img src={img.url} alt={img.filename} style={{ maxWidth: "100%", maxHeight: "100%", display: "block" }} />
+                            <div
+                                key={String(img.id)}
+                                style={{
+                                    background: "var(--panel)",
+                                    padding: 8,
+                                    borderRadius: 8,
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        height: 140,
+                                        overflow: "hidden",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        marginBottom: 8,
+                                    }}
+                                >
+                                    <img
+                                        src={img.url}
+                                        alt={img.filename}
+                                        style={{
+                                            maxWidth: "100%",
+                                            maxHeight: "100%",
+                                            display: "block",
+                                        }}
+                                    />
                                 </div>
-                                <div style={{ fontSize: 12 }}>{img.filename}</div>
-                                <div style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "space-between" }}>
+                                <div style={{ fontSize: 12 }}>
+                                    {img.filename}
+                                </div>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        gap: 8,
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
                                     <div style={{ display: "flex", gap: 6 }}>
-                                        <select onChange={(e) => moveImageToFolder(img.id, Number(e.target.value))} defaultValue={String(img.folder_id || "")} style={{ maxWidth: 180 }}>
-                                            {folders.map((f) => <option key={String(f.id)} value={String(f.id)}>{f.name}</option>)}
+                                        <select
+                                            onChange={(e) =>
+                                                moveImageToFolder(
+                                                    img.id,
+                                                    Number(e.target.value)
+                                                )
+                                            }
+                                            defaultValue={String(
+                                                img.folder_id || ""
+                                            )}
+                                            className="folder-select"
+                                        >
+                                            {folders.map((f) => (
+                                                <option
+                                                    key={String(f.id)}
+                                                    value={String(f.id)}
+                                                >
+                                                    {f.name}
+                                                </option>
+                                            ))}
                                         </select>
-                                        <button className="cta-outline" onClick={() => deleteExistingImage(img)}>🗑️</button>
+                                        <button
+                                            className="cta-outline"
+                                            onClick={() =>
+                                                deleteExistingImage(img)
+                                            }
+                                        >
+                                            🗑️
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         ))}
-                        {images.length === 0 && <div style={{ gridColumn: "1/-1", color: "var(--muted)", padding: 16 }}>No images in this folder.</div>}
+                        {images.length === 0 && (
+                            <div
+                                style={{
+                                    gridColumn: "1/-1",
+                                    color: "var(--muted)",
+                                    padding: 16,
+                                }}
+                            >
+                                No images in this folder.
+                            </div>
+                        )}
                     </div>
                 </main>
             </div>
@@ -195,4 +374,3 @@ const GalleryEditor: React.FC = () => {
 };
 
 export default GalleryEditor;
-
