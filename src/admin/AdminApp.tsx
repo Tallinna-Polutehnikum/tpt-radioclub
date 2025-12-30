@@ -49,9 +49,7 @@ const AdminHome: React.FC = () => {
 };
 
 const AdminApp: React.FC = () => {
-    const { isTokenValid } = useAuth();
-    
-    return isTokenValid ? (
+    return (
         <div className="admin-layout page">
             <aside className="admin-sidebar">
                 <div className="admin-logo">TPT Admin</div>
@@ -74,7 +72,7 @@ const AdminApp: React.FC = () => {
                 </Routes>
             </section>
         </div>
-    ) : <Navigate to="/" replace />;
+    );
 };
 
 export default AdminApp;

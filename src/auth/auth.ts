@@ -1,5 +1,6 @@
 import { supabase } from "../connection/supabase";
 import type { User } from "@supabase/supabase-js";
+import { checkToken } from "../utils";
 
 export const signIn = async (email: string, password: string) => {
   const { data, error } = await supabase.auth.signInWithPassword({
@@ -69,6 +70,24 @@ export async function isIdTokenValid(): Promise<boolean> {
     console.warn("isIdTokenValid error:", err);
     return false;
   }
+}
+
+export async function signOutIfExpired(): Promise<void> {
+  const tokenCheck = checkToken();
+  if (tokenCheck.isValid) {
+    return;
+  }
+  await signOut();
+}
+
+export function startTokenCheckInterval() {
+  signOutIfExpired();
+  
+  const interval = setInterval(() => {
+    signOutIfExpired();
+  }, 1 * 30 * 1000);
+
+  return () => clearInterval(interval);
 }
 
 supabase.auth.onAuthStateChange(async (_event, session) => {

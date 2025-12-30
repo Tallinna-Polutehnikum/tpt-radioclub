@@ -32,8 +32,7 @@ const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 const AnimatedRoutes: React.FC = () => {
-  const { user, isTokenValid } = useAuth()
-
+  const { user } = useAuth();
   const location = useLocation();
 
   return (
@@ -49,7 +48,7 @@ const AnimatedRoutes: React.FC = () => {
         />
         <Route
           path="/about"
-          element={
+          element={ 
             <PageWrapper>
               <About />
             </PageWrapper>
@@ -97,7 +96,7 @@ const AnimatedRoutes: React.FC = () => {
             <ExpandedGallery />
           </PageWrapper>} />
         <Route path="/all-activities" element={<AllActivities />} />
-        {user && isTokenValid && <Route path="/admin/*" element={<AdminApp />} />}
+        {user && <Route path="/admin/*" element={<AdminApp />} />}
         <Route path="/login" element={<AdminLogin />} />
         <Route
           path="/meetup"
