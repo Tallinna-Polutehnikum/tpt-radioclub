@@ -5,7 +5,7 @@ export const getAllCallSigns = async (): Promise<Callsign[]> => {
     const { data: callsigns } = await supabase
         .from("callsigns")
         .select()
-        .order("id", { ascending: true });
+        .order("callsign", { ascending: true });
 
     if (!callsigns) return [];
 
@@ -50,7 +50,7 @@ export const updateCallSign = async (
     return (updatedCallSign as unknown as Callsign) ?? null;
 };
 
-export const deleteCallSign = async (id: string): Promise<boolean> => {
+export const deleteCallSign = async (id: number): Promise<boolean> => {
     const { error } = await supabase.from("callsigns").delete().eq("id", id);
 
     return !error;
