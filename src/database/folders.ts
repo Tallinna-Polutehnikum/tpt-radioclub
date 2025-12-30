@@ -1,4 +1,4 @@
-import supabase from "./supabase";
+import supabase from "../connection/supabase";
 
 export interface Folder {
     id: number;

@@ -12,6 +12,7 @@ import {
     updateActivity,
     deleteActivity,
 } from "../../database/activities";
+import { supabaseUploadImage } from "../../tools/images";
 
 const ToolbarButton: React.FC<{
     onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -186,39 +187,25 @@ const ActivitiesEditor: React.FC = () => {
             return;
         }
 
-        const cloudName = 'dsdocdfcx';
-        const uploadPreset = 'Default-Unsigned';
-
-        const form = new FormData();
-        form.append("file", file);
-        form.append("upload_preset", uploadPreset);
-
         setUploadingImage(true);
 
-        fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
-            method: "POST",
-            body: form,
-        })
+        supabaseUploadImage(file, "activities")
             .then(async (res) => {
-                if (!res.ok) {
-                    const txt = await res.text().catch(() => "");
-                    throw new Error(`Upload failed: ${res.status} ${txt}`);
+                if (res.error) {
+                    alert(`Upload failed: ${res.error.name} ${res.error.message}`);
+                    return;
                 }
-                return res.json();
+                return res.url;
             })
-            .then((json) => {
-                console.log("Cloudinary upload JSON:", json);
-                const src = json.secure_url || json.url;
-                if (!src) throw new Error("No URL returned from Cloudinary");
+            .then((url) => {
+                if (!url) return;
+
                 if (editor) {
-                    setEditing({...editing, image: json.secure_url});
+                    setEditing({...editing, image: url});
                     window.alert("Image uploaded successfully. It has been added to the activity data.");
                 }
             })
-            .catch((err) => {
-                console.error("Cloudinary upload error:", err);
-                window.alert("Image upload failed");
-            })
+
             .finally(() => {
                 setUploadingImage(false);
                 if (fileInputRef.current) fileInputRef.current.value = "";

@@ -10,7 +10,7 @@ const Meetup: React.FC = () => {
             time: "18:00 PM - 22:00 PM",
             location: "Tallinna Polütehnikum, Room A414 (4th floor)",
             description: "Regular weekly gathering of club members to discuss activities, share experiences, and plan upcoming events.",
-            image: "https://res.cloudinary.com/dsdocdfcx/image/upload/v1766959881/tpt_front_sxup2u.png",
+            image: "https://vgpfxbuvddogkxhzaeqr.supabase.co/storage/v1/object/public/gallery/tpt_front.png",
         },
         {
             id: 2,
@@ -19,7 +19,7 @@ const Meetup: React.FC = () => {
             time: "9:00 EET",
             location: "3.670 MHz (LSB)",
             description: "Coordinated HF operating session where members practice on various bands. Good for beginners and experienced operators.",
-            image: "https://res.cloudinary.com/dsdocdfcx/image/upload/v1766959729/ontheair_okoatz.jpg",
+            image: "https://vgpfxbuvddogkxhzaeqr.supabase.co/storage/v1/object/public/gallery/ontheair.jpg",
         },
         {
             id: 3,
@@ -28,7 +28,7 @@ const Meetup: React.FC = () => {
             time: "21:30 EET",
             location: "145.500 MHz (FM)",
             description: "Breaking news from around the world, weather reports, broadcast forecasts and more.",
-            image: "https://res.cloudinary.com/dsdocdfcx/image/upload/v1766961826/IMG_9971_svt5zh.png",
+            image: "https://vgpfxbuvddogkxhzaeqr.supabase.co/storage/v1/object/public/gallery/IMG_9971.png",
         },
         {
             id: 4,
@@ -37,7 +37,7 @@ const Meetup: React.FC = () => {
             time: "20:30 EET",
             location: "27.255 MHz (FM) / CB Channel 23",
             description: "Weekly CB net for local operators. Open discussion, signal reports, and friendly on-air communication for everyone.",
-            image: "https://res.cloudinary.com/dsdocdfcx/image/upload/v1766961993/image_uxtder.jpg",
+            image: "https://vgpfxbuvddogkxhzaeqr.supabase.co/storage/v1/object/public/gallery/image.jpeg",
         },
         {
             id: 5,
@@ -46,7 +46,7 @@ const Meetup: React.FC = () => {
             time: "20:30 EET",
             location: " 433.500 MHz (FM)",
             description: "Weekly UHF net for amateur radio operators. Equipment checks, signal reports, and general discussion on the 70 cm band.",
-            image: "https://res.cloudinary.com/dsdocdfcx/image/upload/v1766962208/older-yagi-antenna-question-v0-44ehnc7tvcxa1_njshvd.webp",
+            image: "https://vgpfxbuvddogkxhzaeqr.supabase.co/storage/v1/object/public/gallery/older-yagi-antenna-question-v0-44ehnc7tvcxa1.webp",
         }
     ];
 

@@ -1,6 +1,6 @@
 import type { Activity } from "../components/Activities";
 import { formatDate } from "../utils";
-import supabase from "./supabase";
+import supabase from "../connection/supabase";
 
 export const getAllActivities = async (): Promise<Activity[]> => {
     const { data: activities } = await supabase
