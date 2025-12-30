@@ -1,19 +1,57 @@
 import React from "react";
-import { Routes, Route, NavLink, Navigate } from "react-router-dom";
+import { Routes, Route, NavLink, Navigate, useNavigate } from "react-router-dom";
 import ActivitiesEditor from "./components/ActivitiesEditor";
 import CallsignManager from "./components/CallsignManager";
 import GalleryEditor from "./components/GalleryEditor";
 import "../styles/admin.css";
+import { useAuth } from "../auth/AuthContext";
+import { signOut } from "../auth/auth";
 
-const AdminHome: React.FC = () => (
-    <div className="admin-welcome page">
-        <h2>Admin Panel</h2>
-        <p>Welcome. Use the menu to manage content.</p>
-    </div>
-);
+const AdminHome: React.FC = () => {
+    const navigate = useNavigate();
+    const { user } = useAuth();
+
+    const handleSignOut = async () => {
+        try {
+            await signOut();
+            navigate("/", { replace: true });
+        } catch (err) {
+            console.error("Sign out error:", err);
+            alert("Failed to sign out");
+        }
+    };
+
+    return (
+        <div className="page">
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
+                <h1 className="page-title">Dashboard</h1>
+                <button className="cta-outline" onClick={handleSignOut}>
+                    Sign out
+                </button>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+                <div style={{ padding: 20, background: "var(--panel)", borderRadius: 12 }}>
+                    <h3>Signed in as</h3>
+                    <p style={{ fontSize: 18, fontWeight: 700, margin: "8px 0" }}>{user?.email}</p>
+                    <p style={{ fontSize: 12, color: "var(--muted)" }}>Admin account</p>
+                </div>
+
+                <div style={{ padding: 20, background: "var(--panel)", borderRadius: 12 }}>
+                    <h3>Help</h3>
+                    <p style={{ fontSize: 14, color: "var(--muted)", margin: 0 }}>
+                        Need help? Check the documentation or contact support.
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const AdminApp: React.FC = () => {
-    return (
+    const { isTokenValid } = useAuth();
+    
+    return isTokenValid ? (
         <div className="admin-layout page">
             <aside className="admin-sidebar">
                 <div className="admin-logo">TPT Admin</div>
@@ -36,7 +74,7 @@ const AdminApp: React.FC = () => {
                 </Routes>
             </section>
         </div>
-    );
+    ) : <Navigate to="/" replace />;
 };
 
 export default AdminApp;

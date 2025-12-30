@@ -1,4 +1,4 @@
-import { supabase } from "../database/supabase";
+import { supabase } from "../connection/supabase";
 import type { User } from "@supabase/supabase-js";
 
 export const signIn = async (email: string, password: string) => {
@@ -63,7 +63,6 @@ export async function isIdTokenValid(): Promise<boolean> {
 
     const expiresAt = session.expires_at;
     if (!expiresAt) return false;
-
     const now = Math.floor(Date.now() / 1000);
     return now < expiresAt;
   } catch (err) {

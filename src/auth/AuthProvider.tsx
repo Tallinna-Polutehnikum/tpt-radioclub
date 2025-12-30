@@ -8,6 +8,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [tokenValid, setTokenValid] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -33,6 +34,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     initUser();
 
+    const isTokenValid = (): void => {
+      const accessToken = document.cookie.split('; ').find(row => row.startsWith('access_token='))?.replace('access_token=', '');
+
+      if (!accessToken) {
+        return setTokenValid(false);
+      }
+
+      try {
+        const payload = JSON.parse(atob(accessToken.split('.')[1]));
+        const now = Math.floor(Date.now() / 1000);
+        setTokenValid(now < payload.exp);
+      } catch (err) {
+        console.warn("isTokenValid error:", err);
+        setTokenValid(false);
+      }
+    }
+
+    isTokenValid();
+
     const { data } = onAuthChange((u) => {
       if (mounted) {
         setUser(u);
@@ -50,6 +70,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     user,
     loading,
     error,
+    isTokenValid: tokenValid
   };
 
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;

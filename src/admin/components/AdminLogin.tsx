@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
-import { signIn, signOut, onAuthChange, getCurrentUser, setIdTokenCookie } from "../../auth/auth";
+import { signIn, onAuthChange, getCurrentUser, setIdTokenCookie } from "../../auth/auth";
 import type { User } from "@supabase/supabase-js";
+import { Navigate } from "react-router";
 
 type Props = {
     onAuthChange?: (user: User) => void;
     adminEmails?: string[];
 };
 
-const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp, adminEmails = [] }) => {
+const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -31,7 +32,7 @@ const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp, adminEmai
     const handleSignIn = async () => {
         setLoading(true);
         setError(null);
-        try { 
+        try {
             const result = await signIn(email.trim(), password);
             const token = result.session?.access_token ?? '';
             setIdTokenCookie(token);
@@ -42,29 +43,8 @@ const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp, adminEmai
         }
     };
 
-    const handleSignOut = async () => {
-        await signOut();
-    };
-
     if (user) {
-        const emailStr = user.email || "";
-        const isAdmin = adminEmails.length ? adminEmails.includes(emailStr) : undefined;
-        return (
-            <div style={{ maxWidth: 520 }} className="page">
-                <h3 className="page-title">Signed in</h3>
-                <p>
-                    Signed in as <strong>{emailStr}</strong>.
-                    {typeof isAdmin === "boolean" && (
-                        <span style={{ marginLeft: 8, color: isAdmin ? "green" : "crimson" }}>
-                            {isAdmin ? "admin" : "not admin"}
-                        </span>
-                    )}
-                </p>
-                <div style={{ marginTop: 12 }}>
-                    <button className="cta-outline" onClick={handleSignOut}>Sign out</button>
-                </div>
-            </div>
-        );
+        return <Navigate to="/admin" replace />;
     }
 
     return (
@@ -72,7 +52,7 @@ const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp, adminEmai
             <div style={{ maxWidth: 520 }}>
                 <h3 className="page-title">Admin sign in</h3>
 
-                <label style={{ display: "block", marginTop: 8,  marginBottom: 4 }}>Email</label>
+                <label style={{ display: "block", marginTop: 8, marginBottom: 4 }}>Email</label>
                 <input
                     className="admin-input"
                     value={email}
@@ -81,7 +61,7 @@ const AdminLogin: React.FC<Props> = ({ onAuthChange: onAuthChangeProp, adminEmai
                     autoComplete="username"
                 />
 
-                <label style={{ display: "block", marginTop: 8, marginBottom: 4}}>Password</label>
+                <label style={{ display: "block", marginTop: 8, marginBottom: 4 }}>Password</label>
                 <input
                     className="admin-input"
                     type="password"

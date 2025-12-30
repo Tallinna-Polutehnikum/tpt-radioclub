@@ -1,10 +1,9 @@
-import supabase from "./supabase";
+import supabase from "../connection/supabase";
 
 export interface ImageMeta {
     id: number;
     url: string;
     filename?: string;
-    public_id?: string;
     folder_id?: number | null;
     created_at?: string;
 };

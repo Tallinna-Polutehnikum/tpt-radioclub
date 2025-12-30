@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createFolder, deleteFolder, getAllFolders, type Folder } from "../../database/folders";
 import { addImageToFolder, deleteImage, deleteImagesByFolderId, getImagesByFolderId, updateImageFolder, type ImageMeta } from "../../database/images";
-import { cloudinaryUploadImage } from "../../connection/cloudinary";
+import { supabaseDeleteImage, supabaseUploadImage } from "../../tools/images";
 
 const GalleryEditor: React.FC = () => {
     const [folders, setFolders] = useState<Folder[]>([]);
@@ -66,11 +66,16 @@ const GalleryEditor: React.FC = () => {
         }
         setUploading(true);
         try {
-            const uploadedImage = await cloudinaryUploadImage(file, selectedFolder.name);
+            const result = await supabaseUploadImage(file, selectedFolder.name);
+
+            if (result.error || !result.url) {
+                window.alert(`Upload failed: ${result.error?.message || "unknown error"}`);
+                return;
+            }
+
             const meta: Partial<ImageMeta> = {
-                url: uploadedImage.url,
+                url: result.url,
                 filename: file.name,
-                public_id: uploadedImage.public_id,
                 folder_id: selectedFolder.id
             };
 
@@ -89,7 +94,6 @@ const GalleryEditor: React.FC = () => {
             const data = await addImageToFolder({
                 url: meta.url,
                 filename: meta.filename,
-                public_id: meta.public_id,
                 folder_id: meta.folder_id,
             });
             setImages((s) => [data as ImageMeta, ...s]);
@@ -110,8 +114,11 @@ const GalleryEditor: React.FC = () => {
     };
 
     const deleteExistingImage = async (image: ImageMeta) => {
-        if (!window.confirm("Delete image metadata?")) return;
+        if (!window.confirm("Delete image metadata?")) 
+            return;
+
         try {
+            await supabaseDeleteImage(`${selectedFolder?.name}/${image.filename}`);
             await deleteImage(image.id);
             const imagesInFolder = await getImagesByFolderId(selectedFolder!.id);
             setImages(imagesInFolder);
@@ -168,7 +175,7 @@ const GalleryEditor: React.FC = () => {
                                 <div style={{ height: 140, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 8 }}>
                                     <img src={img.url} alt={img.filename} style={{ maxWidth: "100%", maxHeight: "100%", display: "block" }} />
                                 </div>
-                                <div style={{ fontSize: 12 }}>{img.filename || img.public_id}</div>
+                                <div style={{ fontSize: 12 }}>{img.filename}</div>
                                 <div style={{ display: "flex", gap: 8, alignItems: "center", justifyContent: "space-between" }}>
                                     <div style={{ display: "flex", gap: 6 }}>
                                         <select onChange={(e) => moveImageToFolder(img.id, Number(e.target.value))} defaultValue={String(img.folder_id || "")} style={{ maxWidth: 180 }}>
@@ -188,3 +195,4 @@ const GalleryEditor: React.FC = () => {
 };
 
 export default GalleryEditor;
+

@@ -1,5 +1,5 @@
 import type { Callsign } from "../components/Callbook";
-import supabase from "./supabase";
+import supabase from "../connection/supabase";
 
 export const getAllCallSigns = async (): Promise<Callsign[]> => { 
     const { data: callsigns } = await supabase
