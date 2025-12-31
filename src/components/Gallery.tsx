@@ -52,7 +52,7 @@ const Gallery: React.FC = () => {
 
     return (
         <section className="page gallery">
-            <h2>Photo Gallery</h2>
+            <h1 className="page-title">Photo Gallery</h1>
             <p className="muted">
                 Moments from TPT Radio Club activities and events
             </p>

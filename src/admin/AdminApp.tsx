@@ -12,6 +12,7 @@ import GalleryEditor from "./components/GalleryEditor";
 import "../styles/admin.css";
 import { useAuth } from "../auth/AuthContext";
 import { signOut } from "../auth/auth";
+import QslBoardEditor from "./components/QslBoardEditor";
 
 const AdminHome: React.FC = () => {
     const navigate = useNavigate();
@@ -134,6 +135,14 @@ const AdminApp: React.FC = () => {
                     >
                         Gallery
                     </NavLink>
+                     <NavLink
+                        to="/admin/qsl-board"
+                        className={({ isActive }) =>
+                            isActive ? "admin-link active" : "admin-link"
+                        }
+                    >
+                        QSL Board
+                    </NavLink>
                 </nav>
             </aside>
 
@@ -143,6 +152,7 @@ const AdminApp: React.FC = () => {
                     <Route path="activities" element={<ActivitiesEditor />} />
                     <Route path="callsigns" element={<CallsignManager />} />
                     <Route path="gallery" element={<GalleryEditor />} />
+                    <Route path="qsl-board" element={<QslBoardEditor />} />
 
                     <Route
                         path="*"

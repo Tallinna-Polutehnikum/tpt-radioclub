@@ -23,6 +23,7 @@ import AdminLogin from "./admin/components/AdminLogin";
 import { useAuth } from "./auth/AuthContext";
 import ExpandedGallery from "./components/ExpandedGallery";
 import Meetup from "./components/Meetup";
+import QslBoard from "./components/QslBoard";
 
 const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
@@ -117,6 +118,14 @@ const AnimatedRoutes: React.FC = () => {
                     element={
                         <PageWrapper>
                             <Meetup />
+                        </PageWrapper>
+                    }
+                />
+                <Route
+                    path="/qsl-board"
+                    element={
+                        <PageWrapper>
+                            <QslBoard />
                         </PageWrapper>
                     }
                 />
