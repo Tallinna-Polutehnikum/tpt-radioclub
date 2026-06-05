@@ -1,5 +1,3 @@
-import { signOut } from "./auth/auth";
-
 export function formatDate(input: string | Date): string {
     const months = [
         "January",
@@ -59,10 +57,6 @@ export const checkToken = (): { isValid: boolean } => {
     try {
         const payload = JSON.parse(atob(accessToken.split(".")[1]));
         const now = Math.floor(Date.now() / 1000);
-
-        if (now > payload.exp + 100) {
-            signOut();
-        }
 
         return { isValid: now < payload.exp };
     } catch (err) {
