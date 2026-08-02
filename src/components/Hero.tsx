@@ -261,7 +261,7 @@ const Hero: React.FC = () => {
             </div>
 
             <div className="hero-right">
-                <div className="poster">
+                {/* <div className="poster">
                     <h3>Club Meetings</h3>
                     <p>
                         Every Tuesday, 18:00 – 22:00 at{" "}
@@ -270,7 +270,7 @@ const Hero: React.FC = () => {
                     <button className="cta" onClick={() => navigate("/meetup")}>
                         Meetups Info
                     </button>
-                </div>
+                </div> */}
             </div>
         </section>
     );
