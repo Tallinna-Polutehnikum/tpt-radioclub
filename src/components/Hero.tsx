@@ -3,6 +3,7 @@ import Player from "./Player";
 import { useNavigate } from "react-router-dom";
 
 const Hero: React.FC = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const navigate = useNavigate();
 
     return (
