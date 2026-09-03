@@ -24,7 +24,6 @@ import { useAuth } from "./auth/AuthContext";
 import ExpandedGallery from "./components/ExpandedGallery";
 import Meetup from "./components/Meetup";
 import QslBoard from "./components/QslBoard";
-import Vp2026 from "./components/Vp2026";
 
 const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
