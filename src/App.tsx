@@ -130,14 +130,6 @@ const AnimatedRoutes: React.FC = () => {
                         </PageWrapper>
                     }
                 />
-                <Route
-                    path="/vp2026"
-                    element={
-                        <PageWrapper>
-                            <Vp2026 />
-                        </PageWrapper>
-                    }
-                />
             </Routes>
         </AnimatePresence>
     );
