@@ -44,9 +44,6 @@ const Header: React.FC = () => {
                          <NavLink to="/qsl-board" className={linkClass}>
                             QSL Board
                         </NavLink>
-                        <NavLink to="/vp2026" className={linkClass}>
-                            Field Day 2026
-                        </NavLink>
                         {user && (
                             <NavLink to="/admin" className="nav-btn">
                                 Admin
