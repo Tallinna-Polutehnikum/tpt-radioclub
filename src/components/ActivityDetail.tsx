@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import DOMPurify from "dompurify";
 import { getActivityById } from "../database/activities";
 import type { Activity } from "./Activities";
 
@@ -52,7 +53,9 @@ const ActivityDetail: React.FC = () => {
             </div>
             <div
                 className="activity-content"
-                dangerouslySetInnerHTML={{ __html: activity.content }}
+                dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(activity.content ?? ""),
+                }}
             ></div>
         </div>
     );

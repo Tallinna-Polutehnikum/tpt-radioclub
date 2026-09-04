@@ -4,6 +4,7 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
+import DOMPurify from "dompurify";
 import "../../styles/admin.css";
 import type { Activity } from "../../components/Activities";
 import {
@@ -62,8 +63,8 @@ const ActivitiesEditor: React.FC = () => {
 
         if (loadedForIdRef.current === idKey) return;
 
-        const content = editing?.content || editing?.content || "<p></p>";
-        editor.commands.setContent(content);
+        const content = editing?.content || "<p></p>";
+        editor.commands.setContent(DOMPurify.sanitize(content));
 
         const editorIsFocused =
             typeof (editor as any).isFocused === "function"
@@ -436,7 +437,9 @@ const ActivitiesEditor: React.FC = () => {
                             className="cta"
                             onClick={async () => {
                                 if (!editing) return;
-                                const html = editor?.getHTML() || "";
+                                const html = DOMPurify.sanitize(
+                                    editor?.getHTML() || ""
+                                );
                                 await saveEdit({
                                     ...editing,
                                     content: html,
