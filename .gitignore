@@ -407,3 +407,5 @@ ASALocalRun/
 .env
 .prettierrc
 .vscode
+dist
+supabase/.temp 

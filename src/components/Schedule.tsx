@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import calendar from "../assets/calendar.json";
+import React, { useEffect, useMemo, useState } from "react";
+import fallbackCalendar from "../assets/calendar.json";
+import supabase from "../connection/supabase";
 
 type ScheduleItem = {
     date: string;
@@ -16,19 +17,58 @@ type MonthData = {
     }[];
 };
 
-const schedules: Record<string, ScheduleItem[]> = {};
+const buildSchedules = (
+    calendar: MonthData[]
+): Record<string, ScheduleItem[]> => {
+    const schedules: Record<string, ScheduleItem[]> = {};
 
-(calendar as MonthData[]).forEach((monthData) => {
-    schedules[monthData.month] = monthData.events.map((event) => ({
-        date: event.date,
-        event: event.desc,
-        time: event.time,
-    }));
-});
+    calendar.forEach((monthData) => {
+        schedules[monthData.month] = monthData.events.map((event) => ({
+            date: event.date,
+            event: event.desc,
+            time: event.time,
+        }));
+    });
 
-const monthList = Object.keys(schedules);
+    return schedules;
+};
 
 const Schedule: React.FC = () => {
+    const [calendar, setCalendar] = useState<MonthData[]>(
+        fallbackCalendar as MonthData[]
+    );
+    const [isLoading, setIsLoading] = useState(true);
+    const [hasError, setHasError] = useState(false);
+
+    useEffect(() => {
+        let cancelled = false;
+
+        supabase.functions
+            .invoke<MonthData[]>("calendar")
+            .then(({ data, error }) => {
+                if (cancelled) return;
+                if (error || !data || data.length === 0) {
+                    setHasError(true);
+                } else {
+                    setCalendar(data);
+                    setHasError(false);
+                }
+            })
+            .catch(() => {
+                if (!cancelled) setHasError(true);
+            })
+            .finally(() => {
+                if (!cancelled) setIsLoading(false);
+            });
+
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+
+    const schedules = useMemo(() => buildSchedules(calendar), [calendar]);
+    const monthList = Object.keys(schedules);
+
     const [selectedMonth, setSelectedMonth] = useState<string>(
         new Date().toLocaleString("default", { month: "long" })
     );
@@ -57,6 +97,12 @@ const Schedule: React.FC = () => {
                         </option>
                     ))}
                 </select>
+                {isLoading && <span className="schedule-status">Loading…</span>}
+                {hasError && (
+                    <span className="schedule-status">
+                        Showing last known calendar
+                    </span>
+                )}
             </div>
 
             <div className="schedule-list">
