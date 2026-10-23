@@ -1,5 +1,6 @@
 import React from "react";
 import Player from "./Player";
+import LatestActivity from "./LatestActivity";
 // import { useNavigate } from "react-router-dom";
 
 const Hero: React.FC = () => {
@@ -261,6 +262,7 @@ const Hero: React.FC = () => {
             </div>
 
             <div className="hero-right">
+                <LatestActivity />
                 {/* <div className="poster">
                     <h3>Club Meetings</h3>
                     <p>

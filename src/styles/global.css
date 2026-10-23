@@ -150,20 +150,20 @@ body {
 
 /* Hero */
 .hero {
-    display: flex;
+    display: grid;
+    grid-template-columns: 560px minmax(0, 1fr) 560px;
+    grid-template-areas: "radio info activity";
     gap: 28px;
     padding: 36px 48px;
 }
 
 .hero-left {
-    flex: 2;
-    display: flex;
-    gap: 24px;
+    display: contents;
 }
 
 .radio-card {
-    width: 640px;
-    max-width: 46vw;
+    grid-area: radio;
+    width: 100%;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
     border-radius: 8px;
     padding: 12px;
@@ -177,8 +177,9 @@ body {
 }
 
 .hero-info {
-    flex: 1;
-    align-self: flex-start;
+    grid-area: info;
+    align-self: start;
+    min-width: 0;
 }
 
 .hero-info h2 {
@@ -193,9 +194,91 @@ body {
 }
 
 .hero-right {
-    width: 320px;
+    grid-area: activity;
     display: flex;
-    align-items: flex-start;
+    min-width: 0;
+}
+
+.latest-activity-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 8px 20px rgba(59, 43, 36, 0.06);
+}
+
+.latest-activity-panel .section-title {
+    font-size: clamp(1.15rem, 1.3vw, 1.6rem);
+    margin-bottom: 8px;
+}
+
+.latest-activity-card {
+    display: flex;
+    gap: clamp(10px, 1vw, 18px);
+    flex: 1;
+    min-height: 0;
+    color: inherit;
+    text-decoration: none;
+}
+
+.latest-activity-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.latest-activity-image {
+    display: block;
+    flex: 0 0 42%;
+    width: 42%;
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.latest-activity-title {
+    margin: 0 0 4px 0;
+    font-size: clamp(1.15rem, 1.3vw, 1.55rem);
+    line-height: 1.2;
+    color: #6d2a18;
+    transition: color 0.2s ease;
+}
+
+.latest-activity-card:hover .latest-activity-title {
+    color: var(--accent);
+}
+
+.latest-activity-date {
+    margin: 0 0 8px 0;
+    color: #8a6a55;
+    font-size: clamp(0.85rem, 0.8vw, 1rem);
+}
+
+.latest-activity-description {
+    margin: 0;
+    color: #3b2a1a;
+    font-size: clamp(0.9rem, 0.85vw, 1.05rem);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.latest-activity-panel .view-all-container {
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.latest-activity-panel .view-all-button {
+    padding: clamp(0.45rem, 0.5vw, 0.7rem) clamp(0.8rem, 1vw, 1.2rem);
+    font-size: clamp(0.9rem, 0.9vw, 1.05rem);
 }
 
 .poster {
@@ -323,33 +406,54 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 980px) {
+@media (max-width: 2499px) {
     .hero {
-        flex-direction: column;
+        grid-template-columns: repeat(2, minmax(0, 560px));
+        grid-template-areas:
+            "radio activity"
+            "info info";
+        justify-content: center;
     }
+}
 
-    .hero-left {
-        width: 100%;
-    }
-
-    .hero-right {
-        width: 100%;
-    }
-
-    .transceiver-svg {
-        max-height: 320px;
-    }
-
+@media (max-width: 1180px) {
     .brand-title {
         font-size: 30px;
     }
 
-    .main-nav {
-        display: none;
-    }
-
     .newsabout {
         flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "radio"
+            "info"
+            "activity";
+    }
+
+    .latest-activity-panel {
+        height: auto;
+    }
+
+    .latest-activity-card {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .latest-activity-image {
+        flex: none;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+
+    .latest-activity-panel .view-all-container {
+        margin-top: 0;
+        padding-top: 12px;
     }
 }
 
