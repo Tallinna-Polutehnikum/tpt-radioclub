@@ -36,7 +36,7 @@ const ActivityDetail: React.FC = () => {
         <div className="activity-detail">
             <Link
                 to={
-                    location.state.shouldReturnToAllActivities
+                    location.state?.shouldReturnToAllActivities
                         ? "/all-activities"
                         : "/activities"
                 }
